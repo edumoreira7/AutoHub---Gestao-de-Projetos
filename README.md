@@ -42,6 +42,18 @@ O sistema é destinado principalmente a:
 
 As tecnologias utilizadas serão definidas ao longo do desenvolvimento do projeto.
 
+## Definition of Done (DoD)
+
+Uma história de usuário será considerada **concluída** quando:
+
+- Todas as tarefas necessárias para sua implementação estiverem concluídas;
+- A funcionalidade estiver implementada conforme os requisitos definidos na história;
+- Front-end, back-end e banco de dados estiverem integrados, quando aplicáveis à história;
+- Os critérios de aceite definidos para a história forem atendidos;
+- A funcionalidade tiver sido testada e apresentar o comportamento esperado;
+- As validações de dados previstas estiverem funcionando;
+- O código estiver versionado e integrado ao repositório GitHub da equipe;
+- Não existirem erros conhecidos que impeçam o uso da funcionalidade.
 ---
 
 > Projeto acadêmico desenvolvido para a disciplina de **Gestão de Projetos**.
