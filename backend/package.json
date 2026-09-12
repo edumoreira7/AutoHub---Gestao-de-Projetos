@@ -6,6 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
+    "imports": {
+    "#utils/*": "./dist/utils/*"
+  },
   "scripts": {
     "build": "nest build",
     "deploy": "nest deploy",

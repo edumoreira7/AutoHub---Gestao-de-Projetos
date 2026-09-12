@@ -5,9 +5,9 @@ import { Model } from 'mongoose';
 import { ClientesCreateDto } from './dto/clientes-create.dto.js';
 import { Cliente } from './clientes-schema.js';
 
-import { invalid, success, alreadyExists, required, requiredBody } from '../utils/response.util.js';
-import { isDuplicateKeyError } from '../utils/mongo.utils.js';
-import { isValidCpf, isValidEmail, isValidPhone } from '../utils/validation.utils.js';
+import { invalid, success, alreadyExists, required, requiredBody } from '#utils/response.util.js';
+import { isDuplicateKeyError } from '#utils/mongo.utils.js';
+import { isValidCpf, isValidEmail, isValidPhone } from '#utils/validation.utils.js';
 
 @Injectable()
 export class ClientesService {
