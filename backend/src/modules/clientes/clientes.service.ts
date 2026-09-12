@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { ClientesCreateDto } from './dto/clientes-create.dto.js';
-import { Cliente } from './clientes-schema.js';
+import { Cliente } from './clientes.schema.js';
 
 import { invalid, success, alreadyExists, required, requiredBody } from '#utils/response.util.js';
 import { isDuplicateKeyError } from '#utils/mongo.utils.js';
