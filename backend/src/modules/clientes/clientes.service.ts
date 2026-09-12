@@ -4,12 +4,12 @@ import { Model, QueryFilter } from 'mongoose';
 
 import { ClientesCreateDto } from './dto/clientes-create.dto.js';
 import { ClientesSearchDto } from './dto/clientes-search.dto.js';
-import { Cliente } from './clientes-schema.js';
+import { Cliente } from './clientes.schema.js';
 
-import { invalid, success, alreadyExists, required, requiredBody } from '../utils/response.util.js';
-import { isDuplicateKeyError, getExcludeFields, MONGO_REGEX_CASE_INSENSITIVE, MONGO_VERSION_KEY } from '../utils/mongo.utils.js';
-import { isValidCpf, isValidEmail, isValidPhone } from '../utils/validation.utils.js';
-import { escapeRegex, onlyDigits } from '../utils/string.utils.js';
+import { invalid, success, alreadyExists, required, requiredBody } from '#utils/response.util.js';
+import { isDuplicateKeyError, getExcludeFields, MONGO_REGEX_CASE_INSENSITIVE, MONGO_VERSION_KEY } from '#utils/mongo.utils.js';
+import { isValidCpf, isValidEmail, isValidPhone } from '#utils/validation.utils.js';
+import { escapeRegex, onlyDigits } from '#utils/string.utils.js';
 
 @Injectable()
 export class ClientesService {

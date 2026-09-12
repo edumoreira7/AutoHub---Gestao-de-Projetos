@@ -1,5 +1,5 @@
 import { Prop, SchemaFactory } from '@nestjs/mongoose';
-import { DefaultSchema } from '../utils/mongo.utils.js';
+import { DefaultSchema } from '../../utils/mongo.utils.js';
 
 @DefaultSchema('clientes')
 export class Cliente {
