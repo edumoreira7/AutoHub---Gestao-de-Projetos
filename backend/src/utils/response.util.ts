@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 
 // Utility used to standardize API response structures and common responses across the application.
-
+//
 // Examples:
 // Success: { success: true, message: 'Customer created successfully', id: '123' }
 // Error: { success: false, message: 'Customer not found' }
