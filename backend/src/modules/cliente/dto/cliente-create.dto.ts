@@ -1,4 +1,4 @@
-export class ClientesCreateDto {
+export class ClienteCreateDto {
     nomeCompleto!: string;
     cpf!: string;
     telefone!: string;
