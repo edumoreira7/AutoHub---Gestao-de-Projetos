@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { CreateClienteDto } from './dto/clientes-create.dto.js';
+import { ClientesCreateDto } from './dto/clientes-create.dto.js';
 import { Cliente } from './clientes-schema.js';
 
 import { invalid, success, alreadyExists, required, requiredBody } from '../utils/response.util.js';
@@ -13,25 +13,25 @@ import { isValidCpf, isValidEmail, isValidPhone } from '../utils/validation.util
 export class ClientesService {
     constructor(@InjectModel(Cliente.name) private readonly clienteModel: Model<Cliente>) { }
 
-    async create(createClienteDto: CreateClienteDto) {
-        if (!createClienteDto) requiredBody();
+    async create(dto: ClientesCreateDto) {
+        if (!dto) requiredBody();
 
-        if (!createClienteDto.nomeCompleto) required('Nome completo');
-        if (!createClienteDto.cpf) required('CPF');
-        if (!createClienteDto.telefone) required('Telefone');
-        if (!createClienteDto.email) required('Email');
+        if (!dto.nomeCompleto) required('Nome completo');
+        if (!dto.cpf) required('CPF');
+        if (!dto.telefone) required('Telefone');
+        if (!dto.email) required('Email');
 
-        if (!isValidCpf(createClienteDto.cpf)) invalid('CPF');
-        if (!isValidEmail(createClienteDto.email)) invalid('Email');
-        if (!isValidPhone(createClienteDto.telefone)) invalid('Telefone');
+        if (!isValidCpf(dto.cpf)) invalid('CPF');
+        if (!isValidEmail(dto.email)) invalid('Email');
+        if (!isValidPhone(dto.telefone)) invalid('Telefone');
 
         //------------------------------------------------------------------------------------------
 
-        const clienteExistente = await this.clienteModel.exists({ cpf: createClienteDto.cpf });
+        const clienteExistente = await this.clienteModel.exists({ cpf: dto.cpf });
         if (clienteExistente) alreadyExists('CPF');
 
         try {
-            const cliente = await this.clienteModel.create(createClienteDto);
+            const cliente = await this.clienteModel.create(dto);
             return success(cliente._id.toString());
         } catch (error: unknown) {
             if (isDuplicateKeyError(error)) alreadyExists('CPF');
