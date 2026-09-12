@@ -20,12 +20,12 @@ export interface ApiResponse<T = unknown> {
     data?: T;
 }
 
-export function success<T>(message?: string, id?: string, data?: T): ApiResponse<T> {
+export function success<T>(id?: string, data?: T, message?: string): ApiResponse<T> {
     return {
         success: true,
-        ...(message ? { message } : {}),
         ...(id ? { id } : {}),
         ...(data !== undefined ? { data } : {}),
+        ...(message ? { message } : {}),
     };
 }
 

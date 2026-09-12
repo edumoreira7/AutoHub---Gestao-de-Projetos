@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { CreateClienteDto } from './dto/create-cliente.dto.js';
+import { CreateClienteDto } from './dto/clientes-create.dto.js';
 import { Cliente } from './clientes-schema.js';
 
 import { invalid, success, alreadyExists, required, requiredBody } from '../utils/response.util.js';
@@ -32,7 +32,7 @@ export class ClientesService {
 
         try {
             const cliente = await this.clienteModel.create(createClienteDto);
-            return success(undefined, cliente._id.toString());
+            return success(cliente._id.toString());
         } catch (error: unknown) {
             if (isDuplicateKeyError(error)) alreadyExists('CPF');
             throw error;

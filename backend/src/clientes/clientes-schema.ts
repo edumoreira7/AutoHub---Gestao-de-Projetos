@@ -1,6 +1,7 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { DefaultSchema } from '../utils/mongo.utils.js';
 
-@Schema({ timestamps: true, collection: 'clientes' })
+@DefaultSchema('clientes')
 export class Cliente {
     @Prop({ required: true, trim: true })
     nomeCompleto!: string;
