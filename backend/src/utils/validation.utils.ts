@@ -1,5 +1,7 @@
+import { onlyDigits } from "./string.utils.js";
+
 export function isValidCpf(cpf: string): boolean {
-    cpf = cpf.replace(/\D/g, '');
+    cpf = onlyDigits(cpf);
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
 
     const calculateDigit = (length: number): number => {

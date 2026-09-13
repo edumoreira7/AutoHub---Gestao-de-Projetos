@@ -1,6 +1,26 @@
 import { Schema, Prop, PropOptions } from '@nestjs/mongoose';
 import { SchemaOptions } from 'mongoose';
 
+/** Makes MongoDB regular expression searches case-insensitive. */
+export const MONGO_REGEX_CASE_INSENSITIVE = 'i';
+/** Makes ^ and $ match the start and end of each line. */
+export const MONGO_REGEX_MULTILINE = 'm';
+/** Ignores unescaped whitespace and allows comments in regular expressions. */
+export const MONGO_REGEX_EXTENDED = 'x';
+/** Allows . to match newline characters. */
+export const MONGO_REGEX_DOT_ALL = 's';
+/** Enables Unicode matching. */
+export const MONGO_REGEX_UNICODE = 'u';
+
+//------------------------------------------------------------------------------------------
+
+/** Mongoose document version key. */
+export const MONGO_VERSION_KEY = '__v';
+/** Applies `.select()` to a query, excluding Mongoose's internal version key (`__v`) from the result. */
+export const excludeVersionKey = <T extends { select: (arg: string) => T }>(query: T): T => query.select(`-${MONGO_VERSION_KEY}`);
+
+//------------------------------------------------------------------------------------------
+
 /** Defines shared Mongoose schema options and applies them to a collection. */
 export const MONGO_DEFAULT_SCHEMA_OPTIONS: SchemaOptions = { timestamps: true, optimisticConcurrency: true };
 /** Applies the shared Mongoose schema options to the specified collection. */

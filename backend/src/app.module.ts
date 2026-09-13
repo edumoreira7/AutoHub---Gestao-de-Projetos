@@ -20,4 +20,4 @@ import { ClienteModule } from './modules/cliente/cliente.module.js';
     ClienteModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }
