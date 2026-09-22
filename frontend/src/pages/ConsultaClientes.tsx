@@ -1,5 +1,22 @@
 import Consulta from "../components/Consulta";
-import { clientesDemo } from "../data/demonstracao";
+import { consultarClientes } from "../services/api";
+
+function formatarCpf(cpf: string) {
+  const digitos = cpf.replace(/\D/g, "");
+  return digitos.length === 11
+    ? digitos.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
+    : cpf;
+}
+
+function formatarTelefone(telefone: string) {
+  const digitos = telefone.replace(/\D/g, "");
+  if (digitos.length === 11)
+    return digitos.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+  if (digitos.length === 10)
+    return digitos.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+  return telefone;
+}
+
 export default function ConsultaClientes() {
   return (
     <Consulta
@@ -7,7 +24,22 @@ export default function ConsultaClientes() {
       titulo="Consultar clientes"
       descricao="Encontre os contatos e dados de quem confia na sua oficina."
       novo={{ destino: "/clientes/novo", texto: "Novo cliente" }}
-      registros={clientesDemo}
+      buscar={async (filtros) => {
+        const clientes = await consultarClientes({
+          nome: filtros.nome,
+          cpf: filtros.cpf?.replace(/\D/g, ""),
+          telefone: filtros.telefone?.replace(/\D/g, ""),
+        });
+
+        return clientes.map((cliente) => ({
+          id: cliente._id,
+          nome: cliente.nomeCompleto,
+          cpf: formatarCpf(cliente.cpf),
+          telefone: formatarTelefone(cliente.telefone),
+          email: cliente.email,
+          endereco: cliente.endereco || "Não informado",
+        }));
+      }}
       vazio="Nenhum cliente encontrado."
       campos={[
         {

@@ -15,7 +15,8 @@ type Props = {
   novo: { destino: string; texto: string };
   campos: Campo[];
   colunas: { chave: string; titulo: string }[];
-  registros: Registro[];
+  registros?: Registro[];
+  buscar?: (filtros: Record<string, string>) => Promise<Registro[]>;
   vazio: string;
 };
 export default function Consulta({
@@ -25,13 +26,17 @@ export default function Consulta({
   novo,
   campos,
   colunas,
-  registros,
+  registros = [],
+  buscar,
   vazio,
 }: Props) {
   const [filtros, setFiltros] = useState<Record<string, string>>({});
   const [erros, setErros] = useState<Record<string, string>>({});
   const [resultado, setResultado] = useState<Registro[] | null>(null);
-  function consultar(event: FormEvent<HTMLFormElement>) {
+  const [erroConsulta, setErroConsulta] = useState("");
+  const [carregando, setCarregando] = useState(false);
+
+  async function consultar(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const falhas: Record<string, string> = {};
     if (!Object.values(filtros).some((valor) => valor.trim()))
@@ -44,25 +49,44 @@ export default function Consulta({
       }
     });
     setErros(falhas);
+    setErroConsulta("");
     if (Object.keys(falhas).length) {
       setResultado(null);
       return;
     }
-    const normalizar = (s: string) =>
-      s
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, "");
-    setResultado(
-      registros.filter((registro) =>
-        campos.every((campo) =>
-          normalizar(registro[campo.chave]).includes(
-            normalizar(filtros[campo.chave] || ""),
+    setCarregando(true);
+
+    try {
+      if (buscar) {
+        setResultado(await buscar(filtros));
+        return;
+      }
+
+      const normalizar = (s: string) =>
+        s
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]/g, "");
+      setResultado(
+        registros.filter((registro) =>
+          campos.every((campo) =>
+            normalizar(registro[campo.chave]).includes(
+              normalizar(filtros[campo.chave] || ""),
+            ),
           ),
         ),
-      ),
-    );
+      );
+    } catch (error) {
+      setResultado(null);
+      setErroConsulta(
+        error instanceof Error
+          ? error.message
+          : "Não foi possível realizar a consulta.",
+      );
+    } finally {
+      setCarregando(false);
+    }
   }
   return (
     <div className="tela-operacional">
@@ -72,10 +96,12 @@ export default function Consulta({
         descricao={descricao}
         novo={novo}
       />
-      <p className="demo-label">
-        Demonstração com dados fictícios · consulta ao banco ainda não
-        conectada.
-      </p>
+      {!buscar && (
+        <p className="demo-label">
+          Demonstração com dados fictícios · consulta ao banco ainda não
+          conectada.
+        </p>
+      )}
       <section className="form-card" aria-label="Filtros de pesquisa">
         <div className="card-heading">
           <div>
@@ -107,6 +133,7 @@ export default function Consulta({
                       [campo.chave]: event.target.value,
                     });
                     setErros({});
+                    setErroConsulta("");
                     setResultado(null);
                   }}
                 />
@@ -130,13 +157,15 @@ export default function Consulta({
               onClick={() => {
                 setFiltros({});
                 setErros({});
+                setErroConsulta("");
                 setResultado(null);
               }}
             >
               Limpar filtros
             </button>
-            <button type="submit">
-              Consultar <span aria-hidden="true">→</span>
+            <button type="submit" disabled={carregando}>
+              {carregando ? "Consultando..." : "Consultar"}{" "}
+              <span aria-hidden="true">→</span>
             </button>
           </div>
         </form>
@@ -152,7 +181,11 @@ export default function Consulta({
             <span className="result-count">{resultado.length}</span>
           )}
         </h2>
-        {resultado === null ? (
+        {erroConsulta ? (
+          <p className="empty-state result-error" role="alert">
+            {erroConsulta}
+          </p>
+        ) : resultado === null ? (
           <p className="empty-state">
             Preencha os filtros e clique em Consultar para ver os resultados.
           </p>
@@ -163,7 +196,7 @@ export default function Consulta({
         ) : (
           <div className="table-wrap">
             <table>
-              <caption className="sr-only">{titulo} — dados fictícios</caption>
+              <caption className="sr-only">{titulo}</caption>
               <thead>
                 <tr>
                   {colunas.map((coluna) => (

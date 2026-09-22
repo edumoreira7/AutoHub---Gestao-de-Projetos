@@ -114,6 +114,11 @@
   border-radius: 12px;
   font-size: 14px;
 }
+.result-error {
+  color: #ff9a9a;
+  border-color: #7a3034;
+  background: #321416;
+}
 .table-wrap {
   overflow-x: auto;
   border: 1px solid #363636;
