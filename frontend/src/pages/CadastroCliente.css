@@ -105,12 +105,24 @@
 .form-footer button:hover {
   background: #c52229;
 }
+.form-footer button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
 .notice {
   margin: 0;
   padding: 18px 30px;
   color: #e5e5e5;
   border-top: 1px solid #363636;
   font-size: 13px;
+}
+.notice-success {
+  color: #8ee7ad;
+  background: #10291a;
+}
+.notice-error {
+  color: #ff9a9a;
+  background: #321416;
 }
 @media (max-width: 550px) {
   .fields {

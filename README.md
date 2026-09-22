@@ -40,7 +40,66 @@ O sistema é destinado principalmente a:
 
 ## Tecnologias
 
-As tecnologias utilizadas serão definidas ao longo do desenvolvimento do projeto.
+- Front-end: React, TypeScript e Vite
+- Back-end: NestJS, TypeScript e Mongoose
+- Banco de dados: MongoDB
+
+## Como rodar o projeto
+
+### Pré-requisitos
+
+- Node.js e npm instalados
+- MongoDB disponível localmente ou por uma conexão externa
+
+### Back-end
+
+Na pasta `backend`, instale as dependências:
+
+```bash
+npm install
+```
+
+Crie o arquivo `backend/.env` com a conexão do MongoDB:
+
+```env
+MONGO_URI=mongodb://localhost:27017/autohub
+```
+
+Opcionalmente, defina também `PORT` e `FRONTEND_URL`. Os valores padrão são `3000` e `http://localhost:5173`.
+
+Inicie a API:
+
+```bash
+npm run start:dev
+```
+
+A API ficará disponível em `http://localhost:3000`.
+
+### Front-end
+
+Em outro terminal, na pasta `frontend`, instale as dependências:
+
+```bash
+npm install
+```
+
+Se a API estiver em outro endereço, crie `frontend/.env.local`:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+Inicie a aplicação:
+
+```bash
+npm run dev
+```
+
+O Vite mostrará no terminal o endereço da aplicação, normalmente `http://localhost:5173`.
+
+### Verificações
+
+Para conferir o código antes de enviar alterações, execute `npm run lint` e `npm run build` dentro das pastas `frontend` e `backend`.
 
 ## Definition of Done (DoD)
 

@@ -1,14 +1,50 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { cadastrarCliente } from "../services/api";
 import "./CadastroCliente.css";
-export default function CadastroCliente() {
-  const [notice, setNotice] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+type Notice = {
+  type: "success" | "error";
+  message: string;
+};
+
+export default function CadastroCliente() {
+  const [notice, setNotice] = useState<Notice | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setNotice(
-      "O envio do cadastro ainda não está disponível. Nenhum dado foi salvo.",
-    );
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setNotice(null);
+    setIsSubmitting(true);
+
+    try {
+      await cadastrarCliente({
+        nomeCompleto: String(formData.get("nomeCompleto") ?? "").trim(),
+        cpf: String(formData.get("cpf") ?? "").replace(/\D/g, ""),
+        telefone: String(formData.get("telefone") ?? "").replace(/\D/g, ""),
+        email: String(formData.get("email") ?? "").trim().toLowerCase(),
+        endereco: String(formData.get("endereco") ?? "").trim() || undefined,
+      });
+
+      form.reset();
+      setNotice({
+        type: "success",
+        message: "Cliente cadastrado com sucesso.",
+      });
+    } catch (error) {
+      setNotice({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Não foi possível cadastrar o cliente.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -36,7 +72,7 @@ export default function CadastroCliente() {
             01
           </span>
         </div>
-        <form onSubmit={handleSubmit} onInput={() => setNotice("")}>
+        <form onSubmit={handleSubmit} onInput={() => setNotice(null)}>
           <div className="fields">
             <label className="full">
               Nome completo <span className="required">*</span>
@@ -87,13 +123,17 @@ export default function CadastroCliente() {
           </div>
           <div className="form-footer">
             <span>Confira os dados antes de continuar.</span>
-            <button type="submit">
-              Cadastrar <span aria-hidden="true">→</span>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Cadastrando..." : "Cadastrar"}{" "}
+              <span aria-hidden="true">→</span>
             </button>
           </div>
           {notice && (
-            <p className="notice" role="status">
-              {notice}
+            <p
+              className={`notice notice-${notice.type}`}
+              role={notice.type === "error" ? "alert" : "status"}
+            >
+              {notice.message}
             </p>
           )}
         </form>
