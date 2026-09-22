@@ -18,10 +18,10 @@ export class ClienteService {
     async create(dto: ClienteCreateDto) {
         if (!dto) requiredBody();
 
-        dto.cpf = dto.cpf?.trim();
+        dto.cpf = onlyDigits(dto.cpf?.trim() ?? '');
         dto.email = dto.email?.trim().toLowerCase();
         dto.nomeCompleto = dto.nomeCompleto?.trim();
-        dto.telefone = dto.telefone?.trim();
+        dto.telefone = onlyDigits(dto.telefone?.trim() ?? '');
         dto.endereco = dto.endereco?.trim();
 
         if (!dto.cpf) required(ClienteFields.cpf);
