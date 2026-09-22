@@ -1,0 +1,174 @@
+.topbar {
+  height: 82px;
+  border-bottom: 1px solid #303030;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6vw;
+  background: #151515;
+}
+.brand {
+  font-size: 23px;
+  font-weight: 850;
+  letter-spacing: -1px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.brand > span:first-child {
+  color: #ff6868;
+}
+.brand-dot {
+  width: 7px;
+  height: 7px;
+  background: #ff6868;
+  margin: 0 0 15px 4px;
+  border-radius: 50%;
+}
+.workspace-label {
+  color: #aaaaaa;
+  font-size: 13px;
+}
+main {
+  max-width: 800px;
+  margin: auto;
+  padding: 34px 24px 28px;
+}
+.breadcrumb {
+  font-size: 13px;
+  color: #aaaaaa;
+  display: flex;
+  gap: 13px;
+}
+.breadcrumb span {
+  color: #666666;
+}
+.page-heading {
+  margin: 38px 0 28px;
+}
+.eyebrow {
+  color: #ff6868;
+  letter-spacing: 2px;
+  font-size: 10px;
+  font-weight: 700;
+}
+h1 {
+  font-size: 36px;
+  letter-spacing: -1.4px;
+  font-weight: 650;
+  margin: 10px 0;
+}
+p {
+  line-height: 1.6;
+}
+.page-heading p {
+  font-size: 14px;
+  color: #b3b3b3;
+  margin: 0;
+}
+.page-footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px 0 0;
+  color: #a2a2a2;
+  font-size: 11px;
+}
+@media (max-width: 550px) {
+  .topbar {
+    height: 68px;
+    padding: 0 22px;
+  }
+  .workspace-label {
+    font-size: 11px;
+  }
+  main {
+    padding: 25px 16px;
+  }
+  .page-heading {
+    margin: 28px 0 22px;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  .page-footer {
+    flex-wrap: wrap;
+  }
+}
+/* Identidade AutoHub: grafite, prata e vermelho. */
+.topbar {
+  height: 112px;
+  border-bottom: 2px solid #a91d23;
+}
+.brand-logo {
+  display: block;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+.brand {
+  gap: 16px;
+}
+.brand-name {
+  font-size: 23px;
+  letter-spacing: -0.8px;
+  color: #f1f1f1;
+}
+.brand-name strong {
+  color: #ff6868;
+}
+.brand > span:first-child {
+  color: inherit;
+}
+@media (max-width: 550px) {
+  .topbar {
+    height: 98px;
+  }
+  .brand-logo {
+    width: 78px;
+    height: 78px;
+  }
+  .brand {
+    gap: 10px;
+  }
+  .brand-name {
+    font-size: 18px;
+  }
+  .workspace-label {
+    max-width: 85px;
+    text-align: right;
+  }
+}
+/* Letras largas, inclinadas e metálicas inspiradas no emblema. */
+.brand-name {
+  display: inline-block;
+  font-family: "Arial Black", "Arial", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+  transform: skewX(-10deg);
+  color: #e9e9e9;
+  background: linear-gradient(
+    180deg,
+    #ffffff 12%,
+    #d3d3d3 42%,
+    #8e8e8e 49%,
+    #f9f9f9 57%,
+    #b4b4b4 90%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 1px #000);
+}
+.brand-name strong {
+  font-weight: inherit;
+  color: inherit;
+}
+@media (max-width: 550px) {
+  .brand-name {
+    font-size: 21px;
+    letter-spacing: -1px;
+  }
+}
