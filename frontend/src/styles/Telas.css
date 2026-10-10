@@ -52,7 +52,8 @@
   min-width: 0;
 }
 .tela-operacional input,
-.tela-operacional select {
+.tela-operacional select,
+.tela-operacional textarea {
   display: block;
   width: 100%;
   margin-top: 8px;
@@ -64,11 +65,16 @@
   color: #f3f3f3;
   font: inherit;
 }
-.tela-operacional input::placeholder {
+.tela-operacional textarea {
+  resize: vertical;
+}
+.tela-operacional input::placeholder,
+.tela-operacional textarea::placeholder {
   color: #999;
 }
 .tela-operacional input:focus,
-.tela-operacional select:focus {
+.tela-operacional select:focus,
+.tela-operacional textarea:focus {
   border-color: #ff6868;
 }
 .tela-operacional input[aria-invalid="true"] {
@@ -93,6 +99,14 @@
   background: transparent;
   color: #ddd;
   border: 1px solid #555;
+}
+.notice-error,
+.notice.error {
+  color: #ff9999;
+}
+.notice-success,
+.notice.success {
+  color: #a8e6b0;
 }
 .results {
   margin-top: 28px;
@@ -170,7 +184,8 @@ tbody tr:last-child td {
     align-items: flex-start;
   }
   .tela-operacional input,
-  .tela-operacional select {
+  .tela-operacional select,
+  .tela-operacional textarea {
     font-size: 16px;
   }
 }

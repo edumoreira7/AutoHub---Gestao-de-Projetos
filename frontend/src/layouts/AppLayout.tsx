@@ -2,6 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import Cabecalho from "../components/Cabecalho";
 import "./AppLayout.css";
 import "../styles/Telas.css";
+
 export default function AppLayout() {
   return (
     <div className="app-shell">
@@ -16,6 +17,7 @@ export default function AppLayout() {
           <NavLink to="/veiculos" end>
             Consultar veículos
           </NavLink>
+          <NavLink to="/ordens-servico/nova">Cadastrar ordem</NavLink>
         </nav>
         <Outlet />
         <footer className="page-footer">

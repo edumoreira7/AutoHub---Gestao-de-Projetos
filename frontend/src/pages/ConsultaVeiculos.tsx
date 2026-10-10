@@ -1,15 +1,33 @@
 import Consulta from "../components/Consulta";
-import { veiculosDemo } from "../data/demonstracao";
+import { consultarVeiculos } from "../services/api";
+
 export default function ConsultaVeiculos() {
   const texto = (v: string) =>
     v.length < 2 ? "Informe pelo menos 2 caracteres." : undefined;
+
   return (
     <Consulta
       grupo="Veículos"
       titulo="Consultar veículos"
       descricao="Localize o veículo e identifique seu proprietário."
       novo={{ destino: "/veiculos/novo", texto: "Novo veículo" }}
-      registros={veiculosDemo}
+      buscar={async (filtros) => {
+        const veiculos = await consultarVeiculos({
+          placa: filtros.placa,
+          marca: filtros.marca,
+          modelo: filtros.modelo,
+        });
+
+        return veiculos.map((veiculo) => ({
+          id: veiculo._id,
+          placa: veiculo.placa,
+          marca: veiculo.marca,
+          modelo: veiculo.modelo,
+          ano: String(veiculo.ano),
+          cor: veiculo.cor,
+          cliente: veiculo.cliente ?? "Cliente não encontrado",
+        }));
+      }}
       vazio="Nenhum veículo encontrado."
       campos={[
         {

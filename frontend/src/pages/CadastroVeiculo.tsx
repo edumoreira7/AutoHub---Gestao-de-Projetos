@@ -1,15 +1,95 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import TituloPagina from "../components/TituloPagina";
-import { clientesDemo } from "../data/demonstracao";
+import {
+  cadastrarVeiculo,
+  consultarClientes,
+  type Cliente,
+} from "../services/api";
+
+type Aviso = {
+  tipo: "success" | "error";
+  mensagem: string;
+};
+
 export default function CadastroVeiculo() {
-  const [aviso, setAviso] = useState("");
-  function cadastrar(event: FormEvent<HTMLFormElement>) {
+  const [aviso, setAviso] = useState<Aviso | null>(null);
+  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [carregandoClientes, setCarregandoClientes] = useState(true);
+  const [erroClientes, setErroClientes] = useState("");
+  const [enviando, setEnviando] = useState(false);
+
+  useEffect(() => {
+    let ativo = true;
+
+    async function carregarClientes() {
+      try {
+        const resultado = await consultarClientes({});
+        if (ativo) setClientes(resultado);
+      } catch (error) {
+        if (ativo) {
+          setErroClientes(
+            error instanceof Error
+              ? error.message
+              : "Não foi possível carregar os clientes.",
+          );
+        }
+      } finally {
+        if (ativo) setCarregandoClientes(false);
+      }
+    }
+
+    void carregarClientes();
+    return () => {
+      ativo = false;
+    };
+  }, []);
+
+  async function cadastrar(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setAviso(
-      "O envio do cadastro ainda não está disponível. Nenhum veículo foi salvo.",
-    );
+    const form = event.currentTarget;
+    const dados = new FormData(form);
+    const clienteId = String(dados.get("clienteId") ?? "");
+
+    if (!clienteId || !clientes.some((cliente) => cliente._id === clienteId)) {
+      setAviso({
+        tipo: "error",
+        mensagem: "Selecione um cliente válido para vincular ao veículo.",
+      });
+      return;
+    }
+
+    setEnviando(true);
+    setAviso(null);
+
+    try {
+      await cadastrarVeiculo({
+        placa: String(dados.get("placa") ?? "").trim(),
+        marca: String(dados.get("marca") ?? "").trim(),
+        modelo: String(dados.get("modelo") ?? "").trim(),
+        ano: Number(dados.get("ano")),
+        cor: String(dados.get("cor") ?? "").trim(),
+        clienteId,
+      });
+
+      form.reset();
+      setAviso({
+        tipo: "success",
+        mensagem: "Veículo cadastrado com sucesso.",
+      });
+    } catch (error) {
+      setAviso({
+        tipo: "error",
+        mensagem:
+          error instanceof Error
+            ? error.message
+            : "Não foi possível cadastrar o veículo.",
+      });
+    } finally {
+      setEnviando(false);
+    }
   }
+
   return (
     <div className="tela-operacional">
       <TituloPagina
@@ -17,9 +97,6 @@ export default function CadastroVeiculo() {
         titulo="Novo veículo"
         descricao="Identifique o veículo e vincule-o ao cliente proprietário."
       />
-      <p className="demo-label">
-        Demonstração · os proprietários disponíveis são fictícios.
-      </p>
       <section className="form-card" aria-labelledby="vehicle-title">
         <div className="card-heading">
           <div>
@@ -33,7 +110,7 @@ export default function CadastroVeiculo() {
             02
           </span>
         </div>
-        <form onSubmit={cadastrar} onInput={() => setAviso("")}>
+        <form onSubmit={cadastrar} onInput={() => setAviso(null)}>
           <div className="fields">
             <label className="full">
               Placa <span className="required">*</span>
@@ -90,30 +167,56 @@ export default function CadastroVeiculo() {
             </label>
             <label className="full address">
               Cliente proprietário <span className="required">*</span>
-              <select name="clienteId" defaultValue="" required>
+              <select
+                name="clienteId"
+                defaultValue=""
+                required
+                disabled={carregandoClientes || clientes.length === 0}
+              >
                 <option value="" disabled>
-                  Selecione o proprietário
+                  {carregandoClientes
+                    ? "Carregando clientes..."
+                    : clientes.length === 0
+                      ? "Nenhum cliente disponível"
+                      : "Selecione o proprietário"}
                 </option>
-                {clientesDemo.map((cliente) => (
-                  <option key={cliente.id} value={cliente.id}>
-                    {cliente.nome} — {cliente.cpf}
+                {clientes.map((cliente) => (
+                  <option key={cliente._id} value={cliente._id}>
+                    {cliente.nomeCompleto} - {cliente.cpf}
                   </option>
                 ))}
               </select>
-              <span className="field-hint">
-                O veículo precisa estar vinculado a um cliente.
-              </span>
+              {erroClientes ? (
+                <span className="field-error" role="alert">
+                  {erroClientes}
+                </span>
+              ) : clientes.length === 0 && !carregandoClientes ? (
+                <span className="field-hint">
+                  Cadastre um cliente antes de cadastrar um veículo.
+                </span>
+              ) : (
+                <span className="field-hint">
+                  O veículo precisa estar vinculado a um cliente existente.
+                </span>
+              )}
             </label>
           </div>
           <div className="form-footer">
             <span>Confira a placa e o proprietário antes de continuar.</span>
-            <button type="submit">
-              Cadastrar <span aria-hidden="true">→</span>
+            <button
+              type="submit"
+              disabled={enviando || carregandoClientes || clientes.length === 0}
+            >
+              {enviando ? "Salvando..." : "Cadastrar"}{" "}
+              <span aria-hidden="true">→</span>
             </button>
           </div>
           {aviso && (
-            <p className="notice" role="status">
-              {aviso}
+            <p
+              className={`notice notice-${aviso.tipo}`}
+              role={aviso.tipo === "error" ? "alert" : "status"}
+            >
+              {aviso.mensagem}
             </p>
           )}
         </form>

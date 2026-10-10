@@ -56,6 +56,38 @@ export interface FiltrosCliente {
   telefone?: string;
 }
 
+export interface NovoVeiculo {
+  placa: string;
+  marca: string;
+  modelo: string;
+  ano: number;
+  cor: string;
+  clienteId: string;
+}
+
+export interface Veiculo {
+  _id: string;
+  placa: string;
+  marca: string;
+  modelo: string;
+  ano: number;
+  cor: string;
+  clienteId?: string;
+  cliente?: string;
+}
+
+export interface FiltrosVeiculo {
+  placa?: string;
+  marca?: string;
+  modelo?: string;
+}
+
+export interface NovaOrdemServico {
+  descricao: string;
+  data: string;
+  veiculoId: string;
+}
+
 export async function cadastrarCliente(
   cliente: NovoCliente,
 ): Promise<ApiResponse> {
@@ -83,4 +115,45 @@ export async function consultarClientes(
   );
 
   return response.data ?? [];
+}
+
+export async function cadastrarVeiculo(
+  veiculo: NovoVeiculo,
+): Promise<ApiResponse> {
+  return request("/veiculos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(veiculo),
+  });
+}
+
+export async function consultarVeiculos(
+  filtros: FiltrosVeiculo = {},
+): Promise<Veiculo[]> {
+  const params = new URLSearchParams();
+
+  Object.entries(filtros).forEach(([chave, valor]) => {
+    if (valor?.trim()) params.set(chave, valor.trim());
+  });
+
+  const query = params.toString();
+  const response = await request<Veiculo[]>(
+    `/veiculos${query ? `?${query}` : ""}`,
+  );
+
+  return response.data ?? [];
+}
+
+export async function cadastrarOrdemServico(
+  ordem: NovaOrdemServico,
+): Promise<ApiResponse> {
+  return request("/ordens-servico", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(ordem),
+  });
 }
