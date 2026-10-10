@@ -88,6 +88,20 @@ export interface NovaOrdemServico {
   veiculoId: string;
 }
 
+export interface OrdemServico {
+  _id: string;
+  descricao: string;
+  data: string;
+  veiculoId?: string;
+  veiculo?: string;
+}
+
+export interface FiltrosOrdemServico {
+  descricao?: string;
+  data?: string;
+  veiculoId?: string;
+}
+
 export async function cadastrarCliente(
   cliente: NovoCliente,
 ): Promise<ApiResponse> {
@@ -156,4 +170,24 @@ export async function cadastrarOrdemServico(
     },
     body: JSON.stringify(ordem),
   });
+}
+
+export async function consultarOrdensServico(
+  filtros: FiltrosOrdemServico = {},
+): Promise<OrdemServico[]> {
+  const params = new URLSearchParams();
+
+  Object.entries(filtros).forEach(([chave, valor]) => {
+    if (valor?.trim()) params.set(chave, valor.trim());
+  });
+
+  const query = params.toString();
+  const response = await request<OrdemServico[]>(
+    `/ordens-servico${query ? `?${query}` : ""}`,
+  );
+
+  return (response.data ?? []).map((ordem) => ({
+    ...ordem,
+    veiculo: ordem.veiculo ?? "Veículo não encontrado",
+  }));
 }

@@ -163,6 +163,36 @@ export default function Consulta({
             >
               Limpar filtros
             </button>
+            <button
+              type="button"
+              className="clear-button"
+              disabled={carregando}
+              onClick={async () => {
+                setErros({});
+                setErroConsulta("");
+                setFiltros({});
+                setCarregando(true);
+                try {
+                  if (buscar) {
+                    setResultado(await buscar({}));
+                    return;
+                  }
+
+                  setResultado(registros);
+                } catch (error) {
+                  setResultado(null);
+                  setErroConsulta(
+                    error instanceof Error
+                      ? error.message
+                      : "Não foi possível carregar todos os registros.",
+                  );
+                } finally {
+                  setCarregando(false);
+                }
+              }}
+            >
+              Mostrar todos
+            </button>
             <button type="submit" disabled={carregando}>
               {carregando ? "Consultando..." : "Consultar"}{" "}
               <span aria-hidden="true">→</span>

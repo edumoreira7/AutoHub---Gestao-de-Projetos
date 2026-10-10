@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoHub | Guia de execução e apresentação</title>
+<style>
+  @page { size: A4; margin: 18mm 17mm; }
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #20242a; font: 10.5pt/1.52 Arial, Helvetica, sans-serif; }
+  header { border-bottom: 4px solid #a91d23; padding-bottom: 12px; margin-bottom: 22px; }
+  .eyebrow { color: #a91d23; font-size: 9pt; font-weight: 700; text-transform: uppercase; }
+  h1 { margin: 5px 0 3px; font-size: 27pt; line-height: 1.08; }
+  .subtitle { margin: 0; color: #5d626a; font-size: 11pt; }
+  h2 { margin: 21px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #d9dce1; font-size: 15pt; }
+  h3 { margin: 13px 0 5px; font-size: 11.5pt; }
+  p { margin: 5px 0 8px; }
+  ul, ol { margin: 5px 0 9px; padding-left: 21px; }
+  li { margin: 3px 0; }
+  code { font: 9pt Consolas, "Courier New", monospace; color: #252a31; }
+  pre { margin: 7px 0 11px; padding: 10px 12px; border-left: 3px solid #a91d23; background: #f2f3f5; white-space: pre-wrap; font: 9pt/1.45 Consolas, "Courier New", monospace; }
+  table { width: 100%; border-collapse: collapse; margin: 7px 0 12px; font-size: 9.3pt; }
+  th, td { padding: 6px 8px; border: 1px solid #d5d8dd; text-align: left; vertical-align: top; }
+  th { background: #f0f1f3; }
+  .callout { padding: 10px 12px; border-left: 4px solid #a91d23; background: #f5f5f6; }
+  .story { break-inside: avoid; }
+  .small { color: #5d626a; font-size: 9pt; }
+  .page-break { break-before: page; }
+  footer { margin-top: 22px; padding-top: 7px; border-top: 1px solid #d9dce1; color: #6c7078; font-size: 8.5pt; }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">AutoHub · Gestão para oficina</div>
+  <h1>Guia de execução e apresentação</h1>
+  <p class="subtitle">Como iniciar o projeto, explicar a API e demonstrar as Histórias 1 a 5</p>
+</header>
+
+<h2>1. Executar no VS Code</h2>
+<p>No computador da faculdade, instale Node.js 22.12 ou superior, abra no VS Code a pasta raiz do AutoHub e use dois terminais PowerShell.</p>
+<h3>Terminal 1 · API</h3>
+<pre>cd backend
+npm install
+npm run start:dev</pre>
+<h3>Terminal 2 · Interface</h3>
+<pre>cd frontend
+npm install
+npm run dev</pre>
+<p>Abra no navegador a URL informada pelo Vite, normalmente <code>http://localhost:5173</code> ou <code>http://localhost:5174</code>. A API fica em <code>http://localhost:3000</code>. Se o terminal disser que <code>npm</code> não é reconhecido, instale Node.js e reinicie o VS Code.</p>
+
+<h2>2. Qual API usamos?</h2>
+<p>O projeto usa uma API REST própria, desenvolvida com NestJS. Não é uma API externa. O frontend envia requisições HTTP com dados JSON; o backend valida as informações, executa a operação e devolve uma resposta com sucesso, dados ou mensagem de erro.</p>
+<table>
+  <thead><tr><th>Método e rota</th><th>Finalidade</th></tr></thead>
+  <tbody>
+    <tr><td><code>POST /clientes</code></td><td>Cadastrar cliente.</td></tr>
+    <tr><td><code>GET /clientes?nome=&amp;cpf=&amp;telefone=</code></td><td>Consultar clientes por um ou mais critérios.</td></tr>
+    <tr><td><code>POST /veiculos</code></td><td>Cadastrar veículo com <code>clienteId</code> do proprietário.</td></tr>
+    <tr><td><code>GET /veiculos?placa=&amp;marca=&amp;modelo=</code></td><td>Consultar veículos e retornar o proprietário.</td></tr>
+    <tr><td><code>POST /ordens-servico</code></td><td>Criar ordem vinculada a um veículo existente.</td></tr>
+  </tbody>
+</table>
+
+<div class="callout"><strong>Persistência atual:</strong> para permitir executar o sistema sem MongoDB instalado, os dados são gravados localmente em <code>backend/data/clientes.json</code>, <code>veiculos.json</code> e <code>ordens-servico.json</code>. Esses arquivos são ignorados pelo Git, portanto não acompanham o projeto ao copiá-lo para outro computador; cadastre dados de demonstração novamente nesse caso.</div>
+
+<h2>3. As cinco histórias</h2>
+<div class="story">
+<h3>HU1 · Cadastrar cliente</h3>
+<p>O funcionário informa nome completo, CPF, telefone e e-mail. O sistema valida os campos, exige CPF com 11 dígitos e telefone com 11 dígitos, impede CPF ou e-mail duplicados, salva o cliente e informa sucesso ou erro. A regra atual do CPF verifica quantidade e formato, não os dígitos verificadores.</p>
+</div>
+<div class="story">
+<h3>HU2 · Consultar clientes</h3>
+<p>Permite pesquisar por nome, CPF ou telefone, exibe os dados encontrados e informa quando não há correspondência. O botão <strong>Mostrar todos</strong> consulta a API sem filtros.</p>
+</div>
+<div class="story">
+<h3>HU3 · Cadastrar veículo</h3>
+<p>Registra placa, marca, modelo, ano e cor. O funcionário seleciona um cliente existente; o sistema envia o identificador do cliente, impede vínculo inexistente e informa o resultado do cadastro.</p>
+</div>
+<div class="story">
+<h3>HU4 · Consultar veículos</h3>
+<p>Permite buscar por placa, marca ou modelo. Os resultados mostram os dados do veículo e o cliente proprietário. Também há mensagem para busca sem resultados e botão <strong>Mostrar todos</strong>.</p>
+</div>
+<div class="story">
+<h3>HU5 · Criar ordem de serviço</h3>
+<p>Registra descrição dos serviços e data, exigindo a seleção de um veículo já cadastrado. A API valida o vínculo, salva a ordem e retorna uma mensagem de sucesso ou erro.</p>
+</div>
+
+<h2>4. Roteiro de demonstração</h2>
+<ol>
+  <li>Cadastre um cliente e mostre a confirmação.</li>
+  <li>Consulte pelo nome, CPF ou telefone; teste também <strong>Mostrar todos</strong> e uma busca sem resultados.</li>
+  <li>Cadastre um veículo selecionando o cliente; tente enviar sem proprietário para demonstrar a validação.</li>
+  <li>Consulte o veículo por placa, marca ou modelo e mostre o nome do proprietário.</li>
+  <li>Crie uma ordem com descrição, data e veículo; tente enviar sem escolher veículo para demonstrar que o vínculo é obrigatório.</li>
+</ol>
+
+<h2>5. Limitação conhecida</h2>
+<p>Os fluxos das cinco histórias estão implementados para demonstração local, mas a aplicação não está conectada ao MongoDB neste modo. As tarefas que exigem banco de dados real ainda dependem da integração com MongoDB; não apresente os arquivos JSON como se fossem tabelas de banco.</p>
+<footer>AutoHub · Guia para execução local e apresentação acadêmica</footer>
+</body>
+</html>
