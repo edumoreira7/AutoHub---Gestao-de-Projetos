@@ -6,8 +6,9 @@ import { VeiculoController } from './veiculo.controller.js';
 import { Veiculo, VeiculoSchema } from './veiculo.schema.js';
 import { VeiculoService } from './veiculo.service.js';
 
-@Module({
-    imports: [
+const mongoModels = process.env.DATA_MODE === 'local'
+    ? []
+    : [
         MongooseModule.forFeature([
             {
                 name: Veiculo.name,
@@ -18,7 +19,10 @@ import { VeiculoService } from './veiculo.service.js';
                 schema: ClienteSchema,
             },
         ]),
-    ],
+    ];
+
+@Module({
+    imports: mongoModels,
     controllers: [VeiculoController],
     providers: [VeiculoService],
 })

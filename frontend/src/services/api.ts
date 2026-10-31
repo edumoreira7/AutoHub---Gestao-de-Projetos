@@ -94,7 +94,40 @@ export interface OrdemServico {
   data: string;
   veiculoId?: string;
   veiculo?: string;
+  status: StatusOrdemServico | null;
+  servicos: ServicoNaOrdem[];
+  valorTotal: number;
 }
+
+export interface Servico {
+  _id: string;
+  nome: string;
+  precoPadrao: number;
+  ativo: boolean;
+}
+
+export interface NovoServico {
+  nome: string;
+  precoPadrao: number;
+  ativo: boolean;
+}
+
+export interface ServicoNaOrdem {
+  servicoId: string;
+  nome: string;
+  preco: number;
+}
+
+export const STATUS_ORDENS_SERVICO = [
+  { valor: "ABERTA", rotulo: "Aberta" },
+  { valor: "EM_ANDAMENTO", rotulo: "Em andamento" },
+  { valor: "AGUARDANDO_PEÇAS", rotulo: "Aguardando peças" },
+  { valor: "CONCLUÍDA", rotulo: "Concluída" },
+  { valor: "CANCELADA", rotulo: "Cancelada" },
+] as const;
+
+export type StatusOrdemServico =
+  (typeof STATUS_ORDENS_SERVICO)[number]["valor"];
 
 export interface FiltrosOrdemServico {
   descricao?: string;
@@ -172,6 +205,50 @@ export async function cadastrarOrdemServico(
   });
 }
 
+export async function cadastrarServico(
+  servico: NovoServico,
+): Promise<ApiResponse> {
+  return request("/servicos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(servico),
+  });
+}
+
+export async function consultarServicos(ativo?: boolean): Promise<Servico[]> {
+  const query = ativo === undefined ? "" : `?ativo=${ativo}`;
+  const response = await request<Servico[]>(`/servicos${query}`);
+  return response.data ?? [];
+}
+
+export async function adicionarServicoAOrdem(
+  ordemId: string,
+  servicoId: string,
+): Promise<ApiResponse<{ servicos: ServicoNaOrdem[]; valorTotal: number }>> {
+  return request(`/ordens-servico/${encodeURIComponent(ordemId)}/servicos`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ servicoId }),
+  });
+}
+
+export async function atualizarStatusOrdemServico(
+  id: string,
+  status: StatusOrdemServico,
+): Promise<ApiResponse> {
+  return request(`/ordens-servico/${encodeURIComponent(id)}/status`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+  });
+}
+
 export async function consultarOrdensServico(
   filtros: FiltrosOrdemServico = {},
 ): Promise<OrdemServico[]> {
@@ -189,5 +266,8 @@ export async function consultarOrdensServico(
   return (response.data ?? []).map((ordem) => ({
     ...ordem,
     veiculo: ordem.veiculo ?? "Veículo não encontrado",
+    status: ordem.status ?? null,
+    servicos: ordem.servicos ?? [],
+    valorTotal: ordem.valorTotal ?? 0,
   }));
 }

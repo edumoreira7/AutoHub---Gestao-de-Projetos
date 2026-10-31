@@ -6,6 +6,9 @@ import {
   consultarVeiculos,
   type Veiculo,
 } from "../services/api";
+import {
+  dataLocalHoje,
+} from "../utils/date";
 
 type Aviso = {
   tipo: "success" | "error";
@@ -13,6 +16,8 @@ type Aviso = {
 };
 
 export default function CadastroOrdemServico() {
+  const hoje = dataLocalHoje();
+  const [dataOrdem, setDataOrdem] = useState(hoje);
   const [veiculos, setVeiculos] = useState<Veiculo[]>([]);
   const [carregandoVeiculos, setCarregandoVeiculos] = useState(true);
   const [erroBusca, setErroBusca] = useState("");
@@ -50,6 +55,7 @@ export default function CadastroOrdemServico() {
     const form = event.currentTarget;
     const dados = new FormData(form);
     const veiculoId = String(dados.get("veiculoId") ?? "");
+    const data = String(dados.get("data") ?? "");
 
     if (!veiculoId || !veiculos.some((veiculo) => veiculo._id === veiculoId)) {
       setAviso({
@@ -62,17 +68,27 @@ export default function CadastroOrdemServico() {
       return;
     }
 
+    if (!data || data < dataLocalHoje()) {
+      setAviso({
+        tipo: "error",
+        mensagem:
+          "Informe uma data válida no formato DD/MM/AAAA, igual ou posterior a hoje.",
+      });
+      return;
+    }
+
     setSalvando(true);
     setAviso(null);
 
     try {
       await cadastrarOrdemServico({
         descricao: String(dados.get("descricao") ?? "").trim(),
-        data: String(dados.get("data") ?? ""),
+        data,
         veiculoId,
       });
 
       form.reset();
+      setDataOrdem(dataLocalHoje());
       setAviso({
         tipo: "success",
         mensagem: "Ordem de serviço cadastrada com sucesso.",
@@ -101,7 +117,7 @@ export default function CadastroOrdemServico() {
         <div className="card-heading">
           <div>
             <h2 id="order-title">Dados da ordem</h2>
-            <p>Descrição, data e veículo são obrigatórios.</p>
+            <p>Selecione o veículo primeiro e informe a data e os serviços.</p>
           </div>
           <span className="section-number" aria-hidden="true">
             03
@@ -109,20 +125,6 @@ export default function CadastroOrdemServico() {
         </div>
         <form onSubmit={cadastrar} onInput={() => setAviso(null)}>
           <div className="fields">
-            <label className="full">
-              Descrição dos serviços <span className="required">*</span>
-              <textarea
-                name="descricao"
-                rows={4}
-                maxLength={1000}
-                placeholder="Descreva os serviços solicitados"
-                required
-              />
-            </label>
-            <label>
-              Data da ordem <span className="required">*</span>
-              <input name="data" type="date" required />
-            </label>
             <label>
               Veículo <span className="required">*</span>
               <select
@@ -145,6 +147,31 @@ export default function CadastroOrdemServico() {
                   </option>
                 ))}
               </select>
+            </label>
+            <label>
+              Data da ordem <span className="required">*</span>
+              <input
+                name="data"
+                type="date"
+                lang="pt-BR"
+                value={dataOrdem}
+                min={hoje}
+                onChange={(event) => setDataOrdem(event.currentTarget.value)}
+                required
+              />
+              <span className="field-hint">
+                Selecione hoje ou uma data futura no calendário.
+              </span>
+            </label>
+            <label className="full">
+              Descrição dos serviços <span className="required">*</span>
+              <textarea
+                name="descricao"
+                rows={4}
+                maxLength={1000}
+                placeholder="Descreva os serviços solicitados"
+                required
+              />
             </label>
             {erroBusca && (
               <p className="field-error full" role="alert">

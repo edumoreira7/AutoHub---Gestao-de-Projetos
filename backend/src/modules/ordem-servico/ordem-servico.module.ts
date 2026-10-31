@@ -5,9 +5,11 @@ import { Veiculo, VeiculoSchema } from '../veiculo/veiculo.schema.js';
 import { OrdemServicoController } from './ordem-servico.controller.js';
 import { OrdemServico, OrdemServicoSchema } from './ordem-servico.schema.js';
 import { OrdemServicoService } from './ordem-servico.service.js';
+import { Servico, ServicoSchema } from '../servico/servico.schema.js';
 
-@Module({
-    imports: [
+const mongoModels = process.env.DATA_MODE === 'local'
+    ? []
+    : [
         MongooseModule.forFeature([
             {
                 name: OrdemServico.name,
@@ -17,8 +19,15 @@ import { OrdemServicoService } from './ordem-servico.service.js';
                 name: Veiculo.name,
                 schema: VeiculoSchema,
             },
+            {
+                name: Servico.name,
+                schema: ServicoSchema,
+            },
         ]),
-    ],
+    ];
+
+@Module({
+    imports: mongoModels,
     controllers: [OrdemServicoController],
     providers: [OrdemServicoService],
 })

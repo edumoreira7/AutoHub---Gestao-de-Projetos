@@ -2,6 +2,7 @@ import { BadRequestException, ConflictException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { LocalDataService } from '../../utils/local-data.service.js';
 import { Cliente } from './cliente.schema.js';
 import { ClienteService } from './cliente.service.js';
 
@@ -11,6 +12,11 @@ describe('ClienteService', () => {
         find: ReturnType<typeof vi.fn>;
         findOne: ReturnType<typeof vi.fn>;
     };
+    let localData: {
+        createId: ReturnType<typeof vi.fn>;
+        read: ReturnType<typeof vi.fn>;
+        update: ReturnType<typeof vi.fn>;
+    };
     let service: ClienteService;
 
     beforeEach(() => {
@@ -19,7 +25,15 @@ describe('ClienteService', () => {
             find: vi.fn(),
             findOne: vi.fn(),
         };
-        service = new ClienteService(model as unknown as Model<Cliente>);
+        localData = {
+            createId: vi.fn(),
+            read: vi.fn(),
+            update: vi.fn(),
+        };
+        service = new ClienteService(
+            localData as unknown as LocalDataService,
+            model as unknown as Model<Cliente>,
+        );
     });
 
     it('normaliza e cadastra um cliente válido', async () => {

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Optional } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 
@@ -9,12 +9,15 @@ import { VeiculoSearchDto } from './dto/veiculo-search.dto.js';
 import { alreadyExists, invalid, notFound, required, requiredBody, success } from '../../utils/response.util.js';
 import { duplicateKeyOf, excludeVersionKey, MONGO_REGEX_CASE_INSENSITIVE } from '../../utils/mongo.utils.js';
 import { escapeRegex } from '../../utils/string.utils.js';
+import { LocalDataService } from '../../utils/local-data.service.js';
+import type { ClienteRecord, VeiculoRecord } from '../../utils/local-data.service.js';
 
 @Injectable()
 export class VeiculoService {
     constructor(
-        @InjectModel(Veiculo.name) private readonly model: Model<Veiculo>,
-        @InjectModel(Cliente.name) private readonly clienteModel: Model<Cliente>,
+        private readonly localData: LocalDataService,
+        @Optional() @InjectModel(Veiculo.name) private readonly model?: Model<Veiculo>,
+        @Optional() @InjectModel(Cliente.name) private readonly clienteModel?: Model<Cliente>,
     ) {}
 
     async findAll(dto: VeiculoSearchDto) {
@@ -37,7 +40,28 @@ export class VeiculoService {
             };
         }
 
-        const veiculos = await excludeVersionKey(this.model.find(filter))
+        if (process.env.DATA_MODE === 'local') {
+            const [veiculos, clientes] = await Promise.all([
+                this.localData.read<VeiculoRecord>('veiculos'),
+                this.localData.read<ClienteRecord>('clientes'),
+            ]);
+            const result = veiculos
+                .filter((veiculo) =>
+                    (!placa || veiculo.placa === placa) &&
+                    (!marca || new RegExp(escapeRegex(marca), 'i').test(veiculo.marca)) &&
+                    (!modelo || new RegExp(escapeRegex(modelo), 'i').test(veiculo.modelo)),
+                )
+                .map((veiculo) => ({
+                    ...veiculo,
+                    cliente: clientes.find((cliente) => cliente._id === veiculo.clienteId)?.nomeCompleto
+                        ?? 'Cliente não encontrado',
+                }));
+            return success(undefined, result);
+        }
+
+        const model = this.model;
+        if (!model) throw new Error('Modelo MongoDB de veículo não disponível.');
+        const veiculos = await excludeVersionKey(model.find(filter))
             .populate('clienteId', 'nomeCompleto')
             .lean() as unknown as Array<Record<string, unknown>>;
 
@@ -75,11 +99,27 @@ export class VeiculoService {
         if (cor.length > 40) invalid(VeiculoFields.cor);
         if (!/^[a-f\d]{24}$/i.test(clienteId) || !Types.ObjectId.isValid(clienteId)) invalid(VeiculoFields.clienteId);
 
-        const cliente = await this.clienteModel.exists({ _id: clienteId });
+        if (process.env.DATA_MODE === 'local') {
+            const clientes = await this.localData.read<ClienteRecord>('clientes');
+            if (!clientes.some((cliente) => cliente._id === clienteId)) notFound('Cliente');
+
+            return this.localData.update<VeiculoRecord, ReturnType<typeof success>>('veiculos', (records) => {
+                if (records.some((record) => record.placa === placa)) alreadyExists(VeiculoFields.placa);
+
+                const id = this.localData.createId();
+                records.push({ _id: id, placa, marca, modelo, ano, cor, clienteId });
+                return success(id, undefined, 'Veículo cadastrado com sucesso');
+            });
+        }
+
+        const model = this.model;
+        const clienteModel = this.clienteModel;
+        if (!model || !clienteModel) throw new Error('Modelos MongoDB de veículo não disponíveis.');
+        const cliente = await clienteModel.exists({ _id: clienteId });
         if (!cliente) notFound('Cliente');
 
         try {
-            const veiculo = await this.model.create({
+            const veiculo = await model.create({
                 placa,
                 marca,
                 modelo,

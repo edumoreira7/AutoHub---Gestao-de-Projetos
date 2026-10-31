@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import type { ReactNode } from "react";
 import TituloPagina from "./TituloPagina";
 type Campo = {
   chave: string;
@@ -8,6 +9,7 @@ type Campo = {
   validar?: (valor: string) => string | undefined;
 };
 type Registro = { id: string; [campo: string]: string };
+type AlteracoesRegistro = Record<string, string>;
 type Props = {
   grupo: string;
   titulo: string;
@@ -17,6 +19,11 @@ type Props = {
   colunas: { chave: string; titulo: string }[];
   registros?: Registro[];
   buscar?: (filtros: Record<string, string>) => Promise<Registro[]>;
+  renderizarCelula?: (
+    registro: Registro,
+    chave: string,
+    atualizarRegistro: (id: string, alteracoes: AlteracoesRegistro) => void,
+  ) => ReactNode;
   vazio: string;
 };
 export default function Consulta({
@@ -28,6 +35,7 @@ export default function Consulta({
   colunas,
   registros = [],
   buscar,
+  renderizarCelula,
   vazio,
 }: Props) {
   const [filtros, setFiltros] = useState<Record<string, string>>({});
@@ -35,6 +43,14 @@ export default function Consulta({
   const [resultado, setResultado] = useState<Registro[] | null>(null);
   const [erroConsulta, setErroConsulta] = useState("");
   const [carregando, setCarregando] = useState(false);
+
+  function atualizarRegistro(id: string, alteracoes: AlteracoesRegistro) {
+    setResultado((atual) =>
+      atual?.map((registro) =>
+        registro.id === id ? { ...registro, ...alteracoes } : registro,
+      ) ?? null,
+    );
+  }
 
   async function consultar(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -240,7 +256,11 @@ export default function Consulta({
                 {resultado.map((registro) => (
                   <tr key={registro.id}>
                     {colunas.map((coluna) => (
-                      <td key={coluna.chave}>{registro[coluna.chave]}</td>
+                      <td key={coluna.chave}>
+                        {renderizarCelula
+                          ? renderizarCelula(registro, coluna.chave, atualizarRegistro)
+                          : registro[coluna.chave]}
+                      </td>
                     ))}
                   </tr>
                 ))}

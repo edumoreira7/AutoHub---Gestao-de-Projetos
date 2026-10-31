@@ -11,7 +11,7 @@ O AutoHub é uma aplicação web voltada para o **uso interno de oficinas mecân
 - Cadastro e gerenciamento de clientes
 - Cadastro e gerenciamento de veículos
 - Gerenciamento de ordens de serviço
-- Gerenciamento de serviços
+- Cadastro e gerenciamento de serviços, com associação de serviços às ordens e cálculo do total
 - Controle de peças e estoque
 - Criação e acompanhamento de orçamentos
 - Histórico de serviços dos veículos
@@ -49,9 +49,12 @@ O sistema é destinado principalmente a:
 ### Pré-requisitos
 
 - Node.js e npm instalados
-- MongoDB disponível localmente ou por uma conexão externa
+- Para usar os dados reais: uma conexão MongoDB, por exemplo, um cluster MongoDB Atlas
+- Para testar sem banco: nenhum MongoDB é necessário
 
 ### Back-end
+
+Os comandos npm devem ser executados dentro de `backend` ou `frontend`; a raiz do repositório não possui `package.json`. Se estiver usando PowerShell na raiz, você também pode usar `npm --prefix .\backend ...` e `npm --prefix .\frontend ...`.
 
 Na pasta `backend`, instale as dependências:
 
@@ -59,21 +62,37 @@ Na pasta `backend`, instale as dependências:
 npm install
 ```
 
-Crie o arquivo `backend/.env` com a conexão do MongoDB:
+#### Executar sem conexão MongoDB (modo local)
 
-```env
-MONGO_URI=mongodb://localhost:27017/autohub
+Este modo salva clientes, veículos, ordens de serviço e serviços em arquivos JSON dentro de `backend/.local-data`. No terminal da pasta `backend`, execute:
+
+```bash
+npm run start:local
 ```
 
-Opcionalmente, defina também `PORT` e `FRONTEND_URL`. Os valores padrão são `3000` e `http://localhost:5173`.
+Os dados locais são apenas para desenvolvimento e **não são enviados automaticamente ao MongoDB**.
 
-Inicie a API:
+#### Executar com MongoDB Atlas
+
+Crie `backend/.env` com a URI real copiada em **Atlas → Connect → Drivers**:
+
+```env
+MONGO_URI=mongodb+srv://USUARIO:SENHA@SEU-CLUSTER.mongodb.net/?retryWrites=true&w=majority
+```
+
+Substitua os valores de exemplo e não compartilhe nem versione a URI. Depois, use o modo normal:
 
 ```bash
 npm run start:dev
 ```
 
-A API ficará disponível em `http://localhost:3000`.
+Opcionalmente, defina `PORT` e `FRONTEND_URL`. Os valores padrão são `3000` e `http://localhost:5173`.
+
+A API ficará disponível em `http://localhost:3000` em ambos os modos.
+
+### Serviços e ordens de serviço
+
+Na aplicação, use **Cadastrar serviço** para informar nome, preço padrão e situação ativa. Em seguida, acesse **Adicionar serviço à ordem**, selecione uma OS e um serviço ativo. O serviço não pode ser repetido na mesma ordem; o preço é copiado do cadastro e a API atualiza o total. As rotas correspondentes são `POST/GET /servicos` e `POST /ordens-servico/:id/servicos`.
 
 ### Front-end
 

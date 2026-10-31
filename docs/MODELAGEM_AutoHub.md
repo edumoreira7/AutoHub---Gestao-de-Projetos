@@ -142,7 +142,7 @@ Representa um tipo de serviço oferecido pela oficina e que poderá ser adiciona
 |---|---|---:|---|
 | `_id` | ObjectId | Sim | Gerado automaticamente |
 | `nome` | String | Sim | Identifica o serviço |
-| `precoPadrao` | Number | Sim | Deve ser numérico e maior que zero |
+| `precoPadrao` | Number | Sim | Deve ser maior que zero e ter até duas casas decimais |
 | `ativo` | Boolean | Sim | Indica se pode ser utilizado em novas OS |
 | `createdAt` | Date | Sim | Gerado automaticamente |
 | `updatedAt` | Date | Sim | Atualizado automaticamente |
@@ -181,23 +181,21 @@ A modelagem precisa atender não apenas à HU05, mas também às histórias de a
 | Campo | Tipo | Obrigatório | Regra |
 |---|---|---:|---|
 | `_id` | ObjectId | Sim | Gerado automaticamente |
-| `veiculo` | ObjectId → Veículo | Sim | Veículo deve existir |
-| `descricao` | String | Não* | Descrição geral do atendimento |
-| `dataOrdem` | Date | Sim | Data da ordem |
+| `veiculoId` | ObjectId → Veículo | Sim | Veículo deve existir |
+| `descricao` | String | Sim | Descrição geral do atendimento |
+| `data` | String | Sim | Data válida no formato `YYYY-MM-DD`; não pode ser anterior a hoje |
 | `status` | String / Enum | Sim | Estado atual da OS |
 | `servicos` | Array de ItemServico | Não | Serviços adicionados à OS |
 | `valorTotal` | Number | Sim | Soma dos serviços; inicia em 0 |
 | `createdAt` | Date | Sim | Gerado automaticamente |
 | `updatedAt` | Date | Sim | Atualizado automaticamente |
 
-\* O Trello atual menciona a descrição na tarefa da HU05, mas não deixa explícito no critério de aceite se ela é obrigatória.
-
 ## Item de serviço dentro da OS
 
 ```text
 ItemServico
-├── servico: ObjectId → Serviço
-├── nomeServico: String
+├── servicoId: ObjectId → Serviço
+├── nome: String
 └── preco: Number
 ```
 
@@ -211,8 +209,8 @@ Assim:
 
 ```json
 {
-  "servico": "ObjectId(servico)",
-  "nomeServico": "Troca de óleo",
+  "servicoId": "ObjectId(servico)",
+  "nome": "Troca de óleo",
   "preco": 150
 }
 ```
@@ -221,41 +219,44 @@ Assim:
 
 ## Status
 
-A HU06 exige que a ordem possua um status válido, mas o Trello ainda não define quais status existem.
-
-### Sugestão para a equipe validar
+A HU06 exige que a ordem possua um status válido. Para esta implementação, foram definidos os seguintes valores:
 
 ```text
 ABERTA
 EM_ANDAMENTO
-CONCLUIDA
+AGUARDANDO_PEÇAS
+CONCLUÍDA
 CANCELADA
 ```
 
-Não implementar esse enum como regra definitiva antes de a equipe confirmar.
+O back-end valida os valores permitidos e o status inicial de uma nova ordem é `ABERTA`.
 
 ## Regras
 
 - A OS só pode ser criada para um veículo previamente cadastrado.
 - A OS não pode existir sem veículo vinculado.
 - Serviços cadastrados podem ser adicionados à OS.
+- Apenas serviços ativos podem ser adicionados e cada serviço pode aparecer uma vez por OS.
 - Ao adicionar um serviço, o valor total deve ser atualizado.
+- As rotas de serviço são `POST /servicos` e `GET /servicos` (com filtro opcional `?ativo=true|false`); a associação é feita por `POST /ordens-servico/:id/servicos`.
 - O status deve poder ser atualizado para um valor válido.
 - A consulta de OS deve apresentar, entre outras informações, seu status.
+- A consulta oferece filtros por descrição, data e identificador do veículo; a data deve existir e o identificador deve ser um `ObjectId` válido.
+- A resposta da consulta preserva o status armazenado. Ordens antigas sem status retornam `null`; a consulta não altera nem migra esses registros.
 
 ## Exemplo
 
 ```json
 {
   "_id": "ObjectId",
-  "veiculo": "ObjectId(veiculo)",
+  "veiculoId": "ObjectId(veiculo)",
   "descricao": "Revisão preventiva",
-  "dataOrdem": "2026-09-07T20:00:00.000Z",
+  "data": "2026-09-07",
   "status": "ABERTA",
   "servicos": [
     {
-      "servico": "ObjectId(servico)",
-      "nomeServico": "Troca de óleo",
+      "servicoId": "ObjectId(servico)",
+      "nome": "Troca de óleo",
       "preco": 150
     }
   ],

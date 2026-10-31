@@ -4,7 +4,7 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export type LocalCollection = 'clientes' | 'veiculos' | 'ordens-servico';
+export type LocalCollection = 'clientes' | 'veiculos' | 'ordens-servico' | 'servicos';
 
 export interface ClienteRecord {
     _id: string;
@@ -30,13 +30,29 @@ export interface OrdemServicoRecord {
     descricao: string;
     data: string;
     veiculoId: string;
+    status?: string;
+    servicos?: OrdemServicoItemRecord[];
+    valorTotal?: number;
+}
+
+export interface ServicoRecord {
+    _id: string;
+    nome: string;
+    precoPadrao: number;
+    ativo: boolean;
+}
+
+export interface OrdemServicoItemRecord {
+    servicoId: string;
+    nome: string;
+    preco: number;
 }
 
 @Injectable()
 export class LocalDataService {
     private readonly dataDirectory = process.env.DATA_DIR
         ? resolve(process.env.DATA_DIR)
-        : resolve(dirname(fileURLToPath(import.meta.url)), '../../data');
+        : resolve(dirname(fileURLToPath(import.meta.url)), '../../.local-data');
     private readonly pending = new Map<LocalCollection, Promise<void>>();
 
     createId(): string {
