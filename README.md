@@ -116,3 +116,13 @@ Uma história de usuário será considerada **concluída** quando:
 ---
 
 > Projeto acadêmico desenvolvido para a disciplina de **Gestão de Projetos**.
+
+## Entrega HU08 e HU09 — Sprint 2
+
+Cadastro de serviços e inclusão de serviços ativos nas ordens estão implementados. Use os menus **Cadastrar serviço** e **Serviços da ordem**. A consulta de ordens exibe os itens e o total; após cadastrar uma ordem, o link de inclusão já leva sua seleção.
+
+O total é calculado no servidor em centavos e atualizado junto com os itens em uma operação atômica. Cada serviço pode ser incluído uma vez por ordem. Preços históricos são preservados.
+
+Para executar todas as verificações, dentro de `backend`, use `npm run test:all`. Antes do primeiro teste de navegador, execute `npx playwright install chromium`. Os testes de integração e navegador usam um MongoDB separado, sem gravar no banco configurado da oficina.
+
+Consulte [a entrega e as evidências de HU08/HU09](docs/ENTREGA_HU08_HU09.md) para contratos da API, decisões de implementação, resultados e instruções completas. O relatório de consolidação é um registro histórico anterior a essas implementações.

@@ -1,0 +1,15 @@
+HU08 e HU09 implementadas em AutoHub - Main.
+
+Cadastro: menu Cadastrar serviço; API POST /servicos.
+Inclusão: menu Serviços da ordem; API POST /ordens-servico/:id/servicos.
+Catálogo de serviços ativos: GET /servicos.
+
+Configure backend/.env (o arquivo local existente foi preservado).
+Exemplo sem credenciais: backend/.env.example.
+Inicie backend com npm run start:dev e frontend com npm run dev.
+
+Validação completa: em backend, npm run test:all.
+Na primeira execução: npx playwright install chromium.
+Os testes usam MongoDB isolado; não gravam no banco da oficina.
+
+Relatório detalhado: ../docs/ENTREGA_HU08_HU09.md.

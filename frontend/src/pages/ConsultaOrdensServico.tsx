@@ -1,5 +1,6 @@
 import Consulta from "../components/Consulta";
 import { consultarOrdensServico } from "../services/api";
+import { moeda } from '../utils/moeda';
 
 export default function ConsultaOrdensServico() {
   return (
@@ -20,6 +21,8 @@ export default function ConsultaOrdensServico() {
           descricao: ordem.descricao,
           data: ordem.data,
           veiculo: ordem.veiculo ?? "Veículo não encontrado",
+          servicos: ordem.servicos?.map(item => item.nome).join(', ') || 'Sem serviços',
+          total: moeda(ordem.totalCentavos ?? 0),
         }));
       }}
       vazio="Nenhuma ordem de serviço encontrada."
@@ -52,6 +55,8 @@ export default function ConsultaOrdensServico() {
         { chave: "descricao", titulo: "Descrição" },
         { chave: "data", titulo: "Data" },
         { chave: "veiculo", titulo: "Veículo" },
+        { chave: 'servicos', titulo: 'Serviços' },
+        { chave: 'total', titulo: 'Total' },
       ]}
     />
   );

@@ -1,0 +1,5 @@
+const fs=require('fs'),p=require('path'),crypto=require('crypto');
+const roots=['AutoHub---Gestao-de-Projetos-main/AutoHub---Gestao-de-Projetos-main','AutoHub-main-com-alteracoes-HU08-1 (2)/AutoHub-main-com-alteracoes-HU08-1/AutoHub---Gestao-de-Projetos-main'];
+function walk(root,rel=''){return fs.readdirSync(p.join(root,rel),{withFileTypes:true}).flatMap(e=>{const r=p.join(rel,e.name);return e.isDirectory()?(['node_modules','.git','dist'].includes(e.name)?[]:walk(root,r)):[r.replaceAll('\\','/')];});}
+const files=roots.map(r=>walk(r)); const rows=[...new Set(files.flat())].sort().map(f=>{const hashes=roots.map(r=>fs.existsSync(p.join(r,f))?crypto.createHash('sha256').update(fs.readFileSync(p.join(r,f))).digest('hex'):null);return {file:f,status:!hashes[0]?'B_ONLY':!hashes[1]?'A_ONLY':hashes[0]===hashes[1]?'SAME':'DIFFERENT',hashes};});
+fs.writeFileSync('comparison-inventory.json',JSON.stringify({roots,rows},null,2)); console.log(rows.reduce((s,r)=>(s[r.status]=(s[r.status]||0)+1,s),{})); console.log(rows.filter(r=>r.status!=='SAME').map(r=>r.status+' '+r.file).join('\n'));

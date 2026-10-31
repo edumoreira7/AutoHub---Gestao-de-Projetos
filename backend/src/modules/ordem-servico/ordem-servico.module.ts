@@ -5,10 +5,12 @@ import { Veiculo, VeiculoSchema } from '../veiculo/veiculo.schema.js';
 import { OrdemServicoController } from './ordem-servico.controller.js';
 import { OrdemServico, OrdemServicoSchema } from './ordem-servico.schema.js';
 import { OrdemServicoService } from './ordem-servico.service.js';
+import { Servico, ServicoSchema } from '../servico/servico.schema.js';
 
 @Module({
     imports: [
         MongooseModule.forFeature([
+            { name: Servico.name, schema: ServicoSchema },
             {
                 name: OrdemServico.name,
                 schema: OrdemServicoSchema,

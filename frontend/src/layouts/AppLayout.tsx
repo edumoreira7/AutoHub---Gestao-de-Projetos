@@ -18,6 +18,9 @@ export default function AppLayout() {
             Consultar veículos
           </NavLink>
           <NavLink to="/ordens-servico/nova">Cadastrar ordem</NavLink>
+          <NavLink to="/ordens-servico" end>Consultar ordens</NavLink>
+          <NavLink to="/servicos/novo">Cadastrar serviço</NavLink>
+          <NavLink to="/ordens-servico/servicos">Serviços da ordem</NavLink>
         </nav>
         <Outlet />
         <footer className="page-footer">

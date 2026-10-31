@@ -6,12 +6,16 @@ node_modules/
 /dist/
 **/dist/
 **/build/
+*.tsbuildinfo
+**/playwright-report/
+**/test-results/
 
 # Ambiente
 .env
 **/.env
 .env.*
 **/.env.*
+!**/.env.example
 
 # Logs
 npm-debug.log*

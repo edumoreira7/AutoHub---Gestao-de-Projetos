@@ -94,6 +94,24 @@ export interface OrdemServico {
   data: string;
   veiculoId?: string;
   veiculo?: string;
+  servicos?: { servicoId: string; nome: string; precoCentavos: number }[];
+  totalCentavos?: number;
+  total?: number;
+}
+
+export interface Servico { _id: string; nome: string; precoPadrao: number; ativo: boolean }
+export async function cadastrarServico(dados: { nome: string; precoPadrao: number }) {
+  return request<Servico>('/servicos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados) });
+}
+export async function consultarServicos(): Promise<Servico[]> {
+  return (await request<Servico[]>('/servicos')).data ?? [];
+}
+export async function adicionarServicoOrdem(ordemId: string, servicoId: string): Promise<OrdemServico> {
+  const resposta = await request<OrdemServico>(`/ordens-servico/${encodeURIComponent(ordemId)}/servicos`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ servicoId }),
+  });
+  if (!resposta.data) throw new Error('A API não retornou a ordem atualizada.');
+  return resposta.data;
 }
 
 export interface FiltrosOrdemServico {

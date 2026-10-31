@@ -1,0 +1,919 @@
+{
+  "date": "2026-10-31",
+  "sources": [
+    "AutoHub---Gestao-de-Projetos-main/AutoHub---Gestao-de-Projetos-main",
+    "AutoHub-main-com-alteracoes-HU08-1 (2)/AutoHub-main-com-alteracoes-HU08-1/AutoHub---Gestao-de-Projetos-main"
+  ],
+  "rows": [
+    {
+      "file": ".gitignore",
+      "status": "SAME",
+      "hashes": [
+        "ca735f19fa73e249b5527de73335b5f0c04a3de4236c5ae3d22d8bf280708a3a",
+        "ca735f19fa73e249b5527de73335b5f0c04a3de4236c5ae3d22d8bf280708a3a"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "ca735f19fa73e249b5527de73335b5f0c04a3de4236c5ae3d22d8bf280708a3a"
+    },
+    {
+      "file": "README.md",
+      "status": "SAME",
+      "hashes": [
+        "ea3bf95cbc1ae6f855c4a830815a0c7bf670f0fcf353f41638015afe8d2e1d55",
+        "ea3bf95cbc1ae6f855c4a830815a0c7bf670f0fcf353f41638015afe8d2e1d55"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "ea3bf95cbc1ae6f855c4a830815a0c7bf670f0fcf353f41638015afe8d2e1d55"
+    },
+    {
+      "file": "backend/.env",
+      "status": "B_ONLY",
+      "hashes": [
+        null,
+        "22e7a41d8413971ece4e70c3deb0173075c59cced4a581eff5efe3c2ede3cb6a"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "22e7a41d8413971ece4e70c3deb0173075c59cced4a581eff5efe3c2ede3cb6a"
+    },
+    {
+      "file": "backend/.gitignore",
+      "status": "SAME",
+      "hashes": [
+        "d73105d7117f1ded0e8e708fcd9ea2b409b8bcfc21d27e7606f6b13d434fb685",
+        "d73105d7117f1ded0e8e708fcd9ea2b409b8bcfc21d27e7606f6b13d434fb685"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "d73105d7117f1ded0e8e708fcd9ea2b409b8bcfc21d27e7606f6b13d434fb685"
+    },
+    {
+      "file": "backend/.prettierrc",
+      "status": "SAME",
+      "hashes": [
+        "e51419e8206a0a5493e85ef1f4dea080982dc9187992bb253220a93d0784f6b2",
+        "e51419e8206a0a5493e85ef1f4dea080982dc9187992bb253220a93d0784f6b2"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "e51419e8206a0a5493e85ef1f4dea080982dc9187992bb253220a93d0784f6b2"
+    },
+    {
+      "file": "backend/README.md",
+      "status": "SAME",
+      "hashes": [
+        "fd5fb8dd9d361198035ab86396c1eebf2ee9587d22c53b10f9c5774d6e30a91a",
+        "fd5fb8dd9d361198035ab86396c1eebf2ee9587d22c53b10f9c5774d6e30a91a"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "fd5fb8dd9d361198035ab86396c1eebf2ee9587d22c53b10f9c5774d6e30a91a"
+    },
+    {
+      "file": "backend/SETUP_LOCAL.txt",
+      "status": "B_ONLY",
+      "hashes": [
+        null,
+        "b42aea18ce497ffb41cbdf6f2eaad99957a6a7da57521932bde4b5e77d2c92be"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "b42aea18ce497ffb41cbdf6f2eaad99957a6a7da57521932bde4b5e77d2c92be"
+    },
+    {
+      "file": "backend/data/clientes.json",
+      "status": "SAME",
+      "hashes": [
+        "5c4a260e20848336559894ba24f5d4526b9ba985fd5398c14561f520a91c9f8b",
+        "5c4a260e20848336559894ba24f5d4526b9ba985fd5398c14561f520a91c9f8b"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "5c4a260e20848336559894ba24f5d4526b9ba985fd5398c14561f520a91c9f8b"
+    },
+    {
+      "file": "backend/data/ordens-servico.json",
+      "status": "SAME",
+      "hashes": [
+        "0c433533ab3a1b736eff171672cce41a5a61c68c7920c59a3da5fa52803bd69c",
+        "0c433533ab3a1b736eff171672cce41a5a61c68c7920c59a3da5fa52803bd69c"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "0c433533ab3a1b736eff171672cce41a5a61c68c7920c59a3da5fa52803bd69c"
+    },
+    {
+      "file": "backend/data/veiculos.json",
+      "status": "SAME",
+      "hashes": [
+        "c6124e98c209441fc9d7d7a0226da1a19ca497f0d1f63218dfc29b019359cfc2",
+        "c6124e98c209441fc9d7d7a0226da1a19ca497f0d1f63218dfc29b019359cfc2"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "c6124e98c209441fc9d7d7a0226da1a19ca497f0d1f63218dfc29b019359cfc2"
+    },
+    {
+      "file": "backend/nest-cli.json",
+      "status": "SAME",
+      "hashes": [
+        "bcb15e3049ff5d131762d2bfe3a6f917c3c64c83ac772467a4073975cd423b5b",
+        "bcb15e3049ff5d131762d2bfe3a6f917c3c64c83ac772467a4073975cd423b5b"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "bcb15e3049ff5d131762d2bfe3a6f917c3c64c83ac772467a4073975cd423b5b"
+    },
+    {
+      "file": "backend/oxlint.json",
+      "status": "SAME",
+      "hashes": [
+        "9081fbb82f737b8d9e0301a6c11e21e7dd9eb079d2445e9f51d0f4385edced23",
+        "9081fbb82f737b8d9e0301a6c11e21e7dd9eb079d2445e9f51d0f4385edced23"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "9081fbb82f737b8d9e0301a6c11e21e7dd9eb079d2445e9f51d0f4385edced23"
+    },
+    {
+      "file": "backend/package-lock.json",
+      "status": "DIFFERENT",
+      "hashes": [
+        "76f686efa27c7e1842d57e77e045d8404cc8be6c9fc33632e9445ad41f6836ce",
+        "7e72880e3c308591ee0b1350b77c62be82215d12bc056a03c7e223002c203614"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "7e72880e3c308591ee0b1350b77c62be82215d12bc056a03c7e223002c203614"
+    },
+    {
+      "file": "backend/package.json",
+      "status": "DIFFERENT",
+      "hashes": [
+        "32523f261c17c2166bc24a72f01e88fa4e4198b6a87794032ca50863c0b05603",
+        "31fc57a106bbfdd0c528e6d85614f96f4887e82dc0dc4f745c71e32ec584be5b"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "31fc57a106bbfdd0c528e6d85614f96f4887e82dc0dc4f745c71e32ec584be5b"
+    },
+    {
+      "file": "backend/src/app.module.ts",
+      "status": "DIFFERENT",
+      "hashes": [
+        "e25c2e0d46a8fba391e862b4639126b39fa08058f609cdddf582d8f3befb712d",
+        "21606d810abdb664a6617dbc6e71d53d545ffc8599a24b05915817d531bd006a"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "21606d810abdb664a6617dbc6e71d53d545ffc8599a24b05915817d531bd006a"
+    },
+    {
+      "file": "backend/src/main.ts",
+      "status": "SAME",
+      "hashes": [
+        "611c2b86af866a510323a0e34f57762e4e8b8ae5552fd3e1d0a7996ec386d861",
+        "611c2b86af866a510323a0e34f57762e4e8b8ae5552fd3e1d0a7996ec386d861"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "611c2b86af866a510323a0e34f57762e4e8b8ae5552fd3e1d0a7996ec386d861"
+    },
+    {
+      "file": "backend/src/modules/cliente/cliente.controller.ts",
+      "status": "SAME",
+      "hashes": [
+        "3e64dfec5c52e0f9c8e918d88ab6cf68dc0ce459b6998b6d8406632ef104da51",
+        "3e64dfec5c52e0f9c8e918d88ab6cf68dc0ce459b6998b6d8406632ef104da51"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "3e64dfec5c52e0f9c8e918d88ab6cf68dc0ce459b6998b6d8406632ef104da51"
+    },
+    {
+      "file": "backend/src/modules/cliente/cliente.module.ts",
+      "status": "SAME",
+      "hashes": [
+        "44e9615e0b764ec4ddfa175afffad31e9aee8767c85c8281cfe66f44f4701a5c",
+        "44e9615e0b764ec4ddfa175afffad31e9aee8767c85c8281cfe66f44f4701a5c"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "44e9615e0b764ec4ddfa175afffad31e9aee8767c85c8281cfe66f44f4701a5c"
+    },
+    {
+      "file": "backend/src/modules/cliente/cliente.schema.spec.ts",
+      "status": "SAME",
+      "hashes": [
+        "27fedfa3f6c75fce4b67a2b4f8ac1c5a5b8083f8d3a46bf665cc190e3d2b967b",
+        "27fedfa3f6c75fce4b67a2b4f8ac1c5a5b8083f8d3a46bf665cc190e3d2b967b"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "27fedfa3f6c75fce4b67a2b4f8ac1c5a5b8083f8d3a46bf665cc190e3d2b967b"
+    },
+    {
+      "file": "backend/src/modules/cliente/cliente.schema.ts",
+      "status": "SAME",
+      "hashes": [
+        "9bf9aa71dc4adad60a9e3ef0685083d88f216549108a8ac41df991c820b330cc",
+        "9bf9aa71dc4adad60a9e3ef0685083d88f216549108a8ac41df991c820b330cc"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "9bf9aa71dc4adad60a9e3ef0685083d88f216549108a8ac41df991c820b330cc"
+    },
+    {
+      "file": "backend/src/modules/cliente/cliente.service.spec.ts",
+      "status": "SAME",
+      "hashes": [
+        "ab0e3fdcb2ce714920188038567d01ef76259180affbe3ff8f5a4ac3a8193f12",
+        "ab0e3fdcb2ce714920188038567d01ef76259180affbe3ff8f5a4ac3a8193f12"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "ab0e3fdcb2ce714920188038567d01ef76259180affbe3ff8f5a4ac3a8193f12"
+    },
+    {
+      "file": "backend/src/modules/cliente/cliente.service.ts",
+      "status": "SAME",
+      "hashes": [
+        "def1b819fda1050448576a452fe23df086c377d9ec36b9759baed9681703f898",
+        "def1b819fda1050448576a452fe23df086c377d9ec36b9759baed9681703f898"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "def1b819fda1050448576a452fe23df086c377d9ec36b9759baed9681703f898"
+    },
+    {
+      "file": "backend/src/modules/cliente/dto/cliente-create.dto.ts",
+      "status": "SAME",
+      "hashes": [
+        "42673310eaaf5e7ef4eafded3652ac2a2a8dfcf5fb6e3dd633c7f440e5dd5559",
+        "42673310eaaf5e7ef4eafded3652ac2a2a8dfcf5fb6e3dd633c7f440e5dd5559"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "42673310eaaf5e7ef4eafded3652ac2a2a8dfcf5fb6e3dd633c7f440e5dd5559"
+    },
+    {
+      "file": "backend/src/modules/cliente/dto/cliente-search.dto.ts",
+      "status": "SAME",
+      "hashes": [
+        "2b4ba71c52f84ef522cb4d6e96e6f67f9a9f2cd7270110997e572e50be6a29a1",
+        "2b4ba71c52f84ef522cb4d6e96e6f67f9a9f2cd7270110997e572e50be6a29a1"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "2b4ba71c52f84ef522cb4d6e96e6f67f9a9f2cd7270110997e572e50be6a29a1"
+    },
+    {
+      "file": "backend/src/modules/ordem-servico/dto/ordem-servico-create.dto.ts",
+      "status": "SAME",
+      "hashes": [
+        "c4fbbaca9a46d3796d34da5e6ce0c594529c516d41e0223191b367f2af1071d2",
+        "c4fbbaca9a46d3796d34da5e6ce0c594529c516d41e0223191b367f2af1071d2"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "c4fbbaca9a46d3796d34da5e6ce0c594529c516d41e0223191b367f2af1071d2"
+    },
+    {
+      "file": "backend/src/modules/ordem-servico/dto/ordem-servico-search.dto.ts",
+      "status": "SAME",
+      "hashes": [
+        "b880b8dbe4f3ad529604350d63a4211fc0a6c3399c5daa4060fa0cf6eb331997",
+        "b880b8dbe4f3ad529604350d63a4211fc0a6c3399c5daa4060fa0cf6eb331997"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "b880b8dbe4f3ad529604350d63a4211fc0a6c3399c5daa4060fa0cf6eb331997"
+    },
+    {
+      "file": "backend/src/modules/ordem-servico/ordem-servico.controller.ts",
+      "status": "SAME",
+      "hashes": [
+        "92c16b824ba6db9b2573c57fb9ff673fa49c7defe758e3688529e94e3e2398e9",
+        "92c16b824ba6db9b2573c57fb9ff673fa49c7defe758e3688529e94e3e2398e9"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "92c16b824ba6db9b2573c57fb9ff673fa49c7defe758e3688529e94e3e2398e9"
+    },
+    {
+      "file": "backend/src/modules/ordem-servico/ordem-servico.module.ts",
+      "status": "SAME",
+      "hashes": [
+        "52f0a2fa37707ecf99d77887588139cb634498fa3d2085cbd9e684e3b10d4dc2",
+        "52f0a2fa37707ecf99d77887588139cb634498fa3d2085cbd9e684e3b10d4dc2"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "52f0a2fa37707ecf99d77887588139cb634498fa3d2085cbd9e684e3b10d4dc2"
+    },
+    {
+      "file": "backend/src/modules/ordem-servico/ordem-servico.schema.ts",
+      "status": "SAME",
+      "hashes": [
+        "44bef5f9c85ff6309602098dc7444d9efa5e32cfe301ed4716a5b27a7cbf4e33",
+        "44bef5f9c85ff6309602098dc7444d9efa5e32cfe301ed4716a5b27a7cbf4e33"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "44bef5f9c85ff6309602098dc7444d9efa5e32cfe301ed4716a5b27a7cbf4e33"
+    },
+    {
+      "file": "backend/src/modules/ordem-servico/ordem-servico.service.ts",
+      "status": "SAME",
+      "hashes": [
+        "c6c9d479fb6d54e83aafbc18daaae45811bc12635ad88944592766bd6368b9c3",
+        "c6c9d479fb6d54e83aafbc18daaae45811bc12635ad88944592766bd6368b9c3"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "c6c9d479fb6d54e83aafbc18daaae45811bc12635ad88944592766bd6368b9c3"
+    },
+    {
+      "file": "backend/src/modules/servico/dto/README.txt",
+      "status": "B_ONLY",
+      "hashes": [
+        null,
+        "161ddf012bad3a7dd3ebb91d4f2f52ad407e9a0183563ca9b20071a6652898a8"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "161ddf012bad3a7dd3ebb91d4f2f52ad407e9a0183563ca9b20071a6652898a8"
+    },
+    {
+      "file": "backend/src/modules/servico/servico-create.dto.ts",
+      "status": "B_ONLY",
+      "hashes": [
+        null,
+        "b1b4a25887f8c196b10e9fd08aa53d0377f3d5d65d955a2590acacfecb4cc556"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "b1b4a25887f8c196b10e9fd08aa53d0377f3d5d65d955a2590acacfecb4cc556"
+    },
+    {
+      "file": "backend/src/modules/servico/servico.module.ts",
+      "status": "B_ONLY",
+      "hashes": [
+        null,
+        "22a4ea04f7f3910cb58c001a5aa0c08c8fd96ba698a50dfc52f19e4969f9f213"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "22a4ea04f7f3910cb58c001a5aa0c08c8fd96ba698a50dfc52f19e4969f9f213"
+    },
+    {
+      "file": "backend/src/modules/servico/servico.schema.ts",
+      "status": "B_ONLY",
+      "hashes": [
+        null,
+        "d735f38b2b6bd2b52cb06a036603331b5dfbff4481378faa725db07dfcb5508b"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "d735f38b2b6bd2b52cb06a036603331b5dfbff4481378faa725db07dfcb5508b"
+    },
+    {
+      "file": "backend/src/modules/servico/servico.service.ts",
+      "status": "B_ONLY",
+      "hashes": [
+        null,
+        "ee475f6cf2944feec05d58963e1df8e3c266cefa69b577f7d89259d8e9d35fc2"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "ee475f6cf2944feec05d58963e1df8e3c266cefa69b577f7d89259d8e9d35fc2"
+    },
+    {
+      "file": "backend/src/modules/veiculo/dto/veiculo-create.dto.ts",
+      "status": "SAME",
+      "hashes": [
+        "533cf1d04ca5ea8bea2cf4086023a0ca1540903f9ffd60f0a5c8ecf0ba6a8ede",
+        "533cf1d04ca5ea8bea2cf4086023a0ca1540903f9ffd60f0a5c8ecf0ba6a8ede"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "533cf1d04ca5ea8bea2cf4086023a0ca1540903f9ffd60f0a5c8ecf0ba6a8ede"
+    },
+    {
+      "file": "backend/src/modules/veiculo/dto/veiculo-search.dto.ts",
+      "status": "SAME",
+      "hashes": [
+        "924197b0c25763286e89ce86552e2ecc43aa246ad2a5b82037ea5a856628874f",
+        "924197b0c25763286e89ce86552e2ecc43aa246ad2a5b82037ea5a856628874f"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "924197b0c25763286e89ce86552e2ecc43aa246ad2a5b82037ea5a856628874f"
+    },
+    {
+      "file": "backend/src/modules/veiculo/veiculo.controller.ts",
+      "status": "SAME",
+      "hashes": [
+        "a54f9ea1be1aece5b005f29bcfd466190277fd1c964b3ed53187249cc0bc8f6d",
+        "a54f9ea1be1aece5b005f29bcfd466190277fd1c964b3ed53187249cc0bc8f6d"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "a54f9ea1be1aece5b005f29bcfd466190277fd1c964b3ed53187249cc0bc8f6d"
+    },
+    {
+      "file": "backend/src/modules/veiculo/veiculo.module.ts",
+      "status": "SAME",
+      "hashes": [
+        "82d2856fd3c9523f58cedd111030cedd0eb9ef0ecbc844a1824390002c9ab484",
+        "82d2856fd3c9523f58cedd111030cedd0eb9ef0ecbc844a1824390002c9ab484"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "82d2856fd3c9523f58cedd111030cedd0eb9ef0ecbc844a1824390002c9ab484"
+    },
+    {
+      "file": "backend/src/modules/veiculo/veiculo.schema.ts",
+      "status": "SAME",
+      "hashes": [
+        "a190a6e57eb2bd3e8ccf2c91ed7f90de248bfb1525c2a72530c6c0e50eace200",
+        "a190a6e57eb2bd3e8ccf2c91ed7f90de248bfb1525c2a72530c6c0e50eace200"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "a190a6e57eb2bd3e8ccf2c91ed7f90de248bfb1525c2a72530c6c0e50eace200"
+    },
+    {
+      "file": "backend/src/modules/veiculo/veiculo.service.ts",
+      "status": "SAME",
+      "hashes": [
+        "257cc11cdb93bbcd2f3fb3af27f5f2575acc0e4dd9935902c7243e1954022374",
+        "257cc11cdb93bbcd2f3fb3af27f5f2575acc0e4dd9935902c7243e1954022374"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "257cc11cdb93bbcd2f3fb3af27f5f2575acc0e4dd9935902c7243e1954022374"
+    },
+    {
+      "file": "backend/src/utils/local-data.module.ts",
+      "status": "SAME",
+      "hashes": [
+        "be2d8796ab6fa66331cac4128aedda6bab4cb010717f270a1fd3a2d0e73ba8f5",
+        "be2d8796ab6fa66331cac4128aedda6bab4cb010717f270a1fd3a2d0e73ba8f5"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "be2d8796ab6fa66331cac4128aedda6bab4cb010717f270a1fd3a2d0e73ba8f5"
+    },
+    {
+      "file": "backend/src/utils/local-data.service.ts",
+      "status": "SAME",
+      "hashes": [
+        "e427ee6bb2baea1e21519804bc9032b6848dc55304f27c9ef0714425de7ad53c",
+        "e427ee6bb2baea1e21519804bc9032b6848dc55304f27c9ef0714425de7ad53c"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "e427ee6bb2baea1e21519804bc9032b6848dc55304f27c9ef0714425de7ad53c"
+    },
+    {
+      "file": "backend/src/utils/mongo.utils.ts",
+      "status": "SAME",
+      "hashes": [
+        "a011a4bbb7b67e00cfe95eadd69609ce08a9e576759481f34abd39c5cb8f20ff",
+        "a011a4bbb7b67e00cfe95eadd69609ce08a9e576759481f34abd39c5cb8f20ff"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "a011a4bbb7b67e00cfe95eadd69609ce08a9e576759481f34abd39c5cb8f20ff"
+    },
+    {
+      "file": "backend/src/utils/response.util.ts",
+      "status": "SAME",
+      "hashes": [
+        "af63f623559ca03d58b0d667e08450830e0d9b333b4487bb81b0ef68eed7ecd6",
+        "af63f623559ca03d58b0d667e08450830e0d9b333b4487bb81b0ef68eed7ecd6"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "af63f623559ca03d58b0d667e08450830e0d9b333b4487bb81b0ef68eed7ecd6"
+    },
+    {
+      "file": "backend/src/utils/string.utils.ts",
+      "status": "SAME",
+      "hashes": [
+        "030c9bbc1d43456336fe0db23f2fb2580731368f6f31cf49c61950d8b6fa291e",
+        "030c9bbc1d43456336fe0db23f2fb2580731368f6f31cf49c61950d8b6fa291e"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "030c9bbc1d43456336fe0db23f2fb2580731368f6f31cf49c61950d8b6fa291e"
+    },
+    {
+      "file": "backend/src/utils/validation.utils.ts",
+      "status": "SAME",
+      "hashes": [
+        "59c6c9f0fae3dd8d5d5f45c30f5165226fc935f894fd8525cc20139b0dae72b3",
+        "59c6c9f0fae3dd8d5d5f45c30f5165226fc935f894fd8525cc20139b0dae72b3"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "59c6c9f0fae3dd8d5d5f45c30f5165226fc935f894fd8525cc20139b0dae72b3"
+    },
+    {
+      "file": "backend/tsconfig.build.json",
+      "status": "SAME",
+      "hashes": [
+        "4d3e73204cf9fbad4e5396f70aab7aa88cb1e93f0ab307123c3265b9c74e1504",
+        "4d3e73204cf9fbad4e5396f70aab7aa88cb1e93f0ab307123c3265b9c74e1504"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "4d3e73204cf9fbad4e5396f70aab7aa88cb1e93f0ab307123c3265b9c74e1504"
+    },
+    {
+      "file": "backend/tsconfig.build.tsbuildinfo",
+      "status": "DIFFERENT",
+      "hashes": [
+        "4512178020955472c17c974d4a03ae9928c4631dc0b98e1b15b0f9a944a75b46",
+        "5d8b38928b76c697e48a6e3cc137b46bcc72b3a7fc9c1956b8ebb54bcfa47949"
+      ],
+      "result": "REGENERATED",
+      "finalHash": "9054a1d23acc3335afeb7c4ff0814ab67c293d5d9f9271876c4c4d635251f293"
+    },
+    {
+      "file": "backend/tsconfig.json",
+      "status": "SAME",
+      "hashes": [
+        "7672c5f2fbf0a6c08c1116bfa9adce659f6a1a96a777410fed274557015f3a19",
+        "7672c5f2fbf0a6c08c1116bfa9adce659f6a1a96a777410fed274557015f3a19"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "7672c5f2fbf0a6c08c1116bfa9adce659f6a1a96a777410fed274557015f3a19"
+    },
+    {
+      "file": "backend/vitest.config.e2e.ts",
+      "status": "SAME",
+      "hashes": [
+        "1aa4b32d1c2a0268f5ae642d60d636902a29db541b41becf139c1d8ee1366310",
+        "1aa4b32d1c2a0268f5ae642d60d636902a29db541b41becf139c1d8ee1366310"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "1aa4b32d1c2a0268f5ae642d60d636902a29db541b41becf139c1d8ee1366310"
+    },
+    {
+      "file": "backend/vitest.config.ts",
+      "status": "SAME",
+      "hashes": [
+        "8fafca686508b9e08f41349d47ea712125c29a588caa6238791362fe2ac07551",
+        "8fafca686508b9e08f41349d47ea712125c29a588caa6238791362fe2ac07551"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "8fafca686508b9e08f41349d47ea712125c29a588caa6238791362fe2ac07551"
+    },
+    {
+      "file": "docs/Apresentacao_AutoHub_temp.html",
+      "status": "SAME",
+      "hashes": [
+        "2216d11f197aa8611ca4d0fcd67c4dfc84da6a1536bada2c51c752c230f88a40",
+        "2216d11f197aa8611ca4d0fcd67c4dfc84da6a1536bada2c51c752c230f88a40"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "2216d11f197aa8611ca4d0fcd67c4dfc84da6a1536bada2c51c752c230f88a40"
+    },
+    {
+      "file": "docs/Inicio da Sprint 1.md",
+      "status": "SAME",
+      "hashes": [
+        "0391f86a77a8df35ee4d2035a745c2f38e199428c0a0946276f410e77f011ce2",
+        "0391f86a77a8df35ee4d2035a745c2f38e199428c0a0946276f410e77f011ce2"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "0391f86a77a8df35ee4d2035a745c2f38e199428c0a0946276f410e77f011ce2"
+    },
+    {
+      "file": "docs/MODELAGEM_AutoHub.md",
+      "status": "SAME",
+      "hashes": [
+        "5656ecf36d4ee6e2d9fc103dcc4f4307b5f91c2ee02209ae88a76826ad120e58",
+        "5656ecf36d4ee6e2d9fc103dcc4f4307b5f91c2ee02209ae88a76826ad120e58"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "5656ecf36d4ee6e2d9fc103dcc4f4307b5f91c2ee02209ae88a76826ad120e58"
+    },
+    {
+      "file": "frontend/.gitignore",
+      "status": "SAME",
+      "hashes": [
+        "fe718e7babb14f3cbad2d97f08889b9ce5215ed3fe0e43b2b8cfbfb3b9b844e8",
+        "fe718e7babb14f3cbad2d97f08889b9ce5215ed3fe0e43b2b8cfbfb3b9b844e8"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "fe718e7babb14f3cbad2d97f08889b9ce5215ed3fe0e43b2b8cfbfb3b9b844e8"
+    },
+    {
+      "file": "frontend/.oxlintrc.json",
+      "status": "SAME",
+      "hashes": [
+        "b4d344818a1e1bf43997e4744a9153c8eef770c98b58229cd86363dabb85ded4",
+        "b4d344818a1e1bf43997e4744a9153c8eef770c98b58229cd86363dabb85ded4"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "b4d344818a1e1bf43997e4744a9153c8eef770c98b58229cd86363dabb85ded4"
+    },
+    {
+      "file": "frontend/README.md",
+      "status": "SAME",
+      "hashes": [
+        "fa8aac78b8be1993010b57f41000a243ecba006f6731513fe4ec91e788bf2517",
+        "fa8aac78b8be1993010b57f41000a243ecba006f6731513fe4ec91e788bf2517"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "fa8aac78b8be1993010b57f41000a243ecba006f6731513fe4ec91e788bf2517"
+    },
+    {
+      "file": "frontend/index.html",
+      "status": "SAME",
+      "hashes": [
+        "c489ca10e39dee2c944678c7cbe29c05c1464f0d3ad331829be0616dfe292ada",
+        "c489ca10e39dee2c944678c7cbe29c05c1464f0d3ad331829be0616dfe292ada"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "c489ca10e39dee2c944678c7cbe29c05c1464f0d3ad331829be0616dfe292ada"
+    },
+    {
+      "file": "frontend/package-lock.json",
+      "status": "SAME",
+      "hashes": [
+        "cfd3b5d33410ed9338f7c39323fecbd3816b3f6090167a08dc0639dcf03bc1b4",
+        "cfd3b5d33410ed9338f7c39323fecbd3816b3f6090167a08dc0639dcf03bc1b4"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "cfd3b5d33410ed9338f7c39323fecbd3816b3f6090167a08dc0639dcf03bc1b4"
+    },
+    {
+      "file": "frontend/package.json",
+      "status": "SAME",
+      "hashes": [
+        "3cdef4064154cff5d954935d06192a8ac4e2cad125627edc362a5f4cb39c48ce",
+        "3cdef4064154cff5d954935d06192a8ac4e2cad125627edc362a5f4cb39c48ce"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "3cdef4064154cff5d954935d06192a8ac4e2cad125627edc362a5f4cb39c48ce"
+    },
+    {
+      "file": "frontend/public/autohub-logo.png",
+      "status": "SAME",
+      "hashes": [
+        "2b8cc0b1f31bc873bcecbb6a23ef874a0d2d3fc32cb9ce045b71a5d8885ba2a4",
+        "2b8cc0b1f31bc873bcecbb6a23ef874a0d2d3fc32cb9ce045b71a5d8885ba2a4"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "2b8cc0b1f31bc873bcecbb6a23ef874a0d2d3fc32cb9ce045b71a5d8885ba2a4"
+    },
+    {
+      "file": "frontend/public/favicon.svg",
+      "status": "SAME",
+      "hashes": [
+        "61bc9a161de58248288e6905425d7180f0624c2865007b97d763fdac12043a66",
+        "61bc9a161de58248288e6905425d7180f0624c2865007b97d763fdac12043a66"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "61bc9a161de58248288e6905425d7180f0624c2865007b97d763fdac12043a66"
+    },
+    {
+      "file": "frontend/public/icons.svg",
+      "status": "SAME",
+      "hashes": [
+        "b45fa506195cfcdef406ba9f0c77b36ddc1a7c224040926ec70abc2fdea7b93a",
+        "b45fa506195cfcdef406ba9f0c77b36ddc1a7c224040926ec70abc2fdea7b93a"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "b45fa506195cfcdef406ba9f0c77b36ddc1a7c224040926ec70abc2fdea7b93a"
+    },
+    {
+      "file": "frontend/src/App.css",
+      "status": "SAME",
+      "hashes": [
+        "6e25a776d3e8102da5bacb3cb99f4a5fc662a2e01e6143140671a556d28c3d5c",
+        "6e25a776d3e8102da5bacb3cb99f4a5fc662a2e01e6143140671a556d28c3d5c"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "6e25a776d3e8102da5bacb3cb99f4a5fc662a2e01e6143140671a556d28c3d5c"
+    },
+    {
+      "file": "frontend/src/App.tsx",
+      "status": "SAME",
+      "hashes": [
+        "c0459c71a314fcb47579c7140d731b21766fd0e2fdb75e552bafc655ba3301f5",
+        "c0459c71a314fcb47579c7140d731b21766fd0e2fdb75e552bafc655ba3301f5"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "c0459c71a314fcb47579c7140d731b21766fd0e2fdb75e552bafc655ba3301f5"
+    },
+    {
+      "file": "frontend/src/assets/hero.png",
+      "status": "SAME",
+      "hashes": [
+        "881ffbcaafc212e49addad08846a5b82761355fa20624253af3477ba33262c5c",
+        "881ffbcaafc212e49addad08846a5b82761355fa20624253af3477ba33262c5c"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "881ffbcaafc212e49addad08846a5b82761355fa20624253af3477ba33262c5c"
+    },
+    {
+      "file": "frontend/src/assets/react.svg",
+      "status": "SAME",
+      "hashes": [
+        "35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5",
+        "35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5"
+    },
+    {
+      "file": "frontend/src/assets/vite.svg",
+      "status": "SAME",
+      "hashes": [
+        "5be21acd42eb7b896e517f4e0f0f11eb5c5d9e54fbbcebe9453f033008fcca6f",
+        "5be21acd42eb7b896e517f4e0f0f11eb5c5d9e54fbbcebe9453f033008fcca6f"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "5be21acd42eb7b896e517f4e0f0f11eb5c5d9e54fbbcebe9453f033008fcca6f"
+    },
+    {
+      "file": "frontend/src/components/Cabecalho.tsx",
+      "status": "SAME",
+      "hashes": [
+        "3e133577d3517b1e52a04dcc70d2b2bc40764876fae09cff9985a756ae381453",
+        "3e133577d3517b1e52a04dcc70d2b2bc40764876fae09cff9985a756ae381453"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "3e133577d3517b1e52a04dcc70d2b2bc40764876fae09cff9985a756ae381453"
+    },
+    {
+      "file": "frontend/src/components/Consulta.tsx",
+      "status": "SAME",
+      "hashes": [
+        "a190bd27ab6a9604fbfc83247ff41a6a79a03b85943014565bf2e78eeb00f07e",
+        "a190bd27ab6a9604fbfc83247ff41a6a79a03b85943014565bf2e78eeb00f07e"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "a190bd27ab6a9604fbfc83247ff41a6a79a03b85943014565bf2e78eeb00f07e"
+    },
+    {
+      "file": "frontend/src/components/TituloPagina.tsx",
+      "status": "SAME",
+      "hashes": [
+        "6df8d337d1219f17b814f9961653361bbb5c5eef51621cab261c393e15359bcd",
+        "6df8d337d1219f17b814f9961653361bbb5c5eef51621cab261c393e15359bcd"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "6df8d337d1219f17b814f9961653361bbb5c5eef51621cab261c393e15359bcd"
+    },
+    {
+      "file": "frontend/src/data/demonstracao.ts",
+      "status": "SAME",
+      "hashes": [
+        "e9ce5875210f7f590e7d1729bd9671aead4bb868a0c4380fe6c448725c816065",
+        "e9ce5875210f7f590e7d1729bd9671aead4bb868a0c4380fe6c448725c816065"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "e9ce5875210f7f590e7d1729bd9671aead4bb868a0c4380fe6c448725c816065"
+    },
+    {
+      "file": "frontend/src/index.css",
+      "status": "SAME",
+      "hashes": [
+        "a66d41e1bd3192a66a4e974334943cfe29e815413f0a6a4a7250e8b68d9a1770",
+        "a66d41e1bd3192a66a4e974334943cfe29e815413f0a6a4a7250e8b68d9a1770"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "a66d41e1bd3192a66a4e974334943cfe29e815413f0a6a4a7250e8b68d9a1770"
+    },
+    {
+      "file": "frontend/src/layouts/AppLayout.css",
+      "status": "SAME",
+      "hashes": [
+        "a71a3d758c0d35f1fefdbf62b16b659fab6731d26d52f72ac8cdf913f1303924",
+        "a71a3d758c0d35f1fefdbf62b16b659fab6731d26d52f72ac8cdf913f1303924"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "a71a3d758c0d35f1fefdbf62b16b659fab6731d26d52f72ac8cdf913f1303924"
+    },
+    {
+      "file": "frontend/src/layouts/AppLayout.tsx",
+      "status": "SAME",
+      "hashes": [
+        "a4aa12433b84a23646261a9a43d59f5bd5901f5a69ffa6b9bb20c5b5676e41ad",
+        "a4aa12433b84a23646261a9a43d59f5bd5901f5a69ffa6b9bb20c5b5676e41ad"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "a4aa12433b84a23646261a9a43d59f5bd5901f5a69ffa6b9bb20c5b5676e41ad"
+    },
+    {
+      "file": "frontend/src/main.tsx",
+      "status": "SAME",
+      "hashes": [
+        "6e9e5807fcbd48b75a96db5cbef36c996262196be42e6d4760dc86babbe61ad2",
+        "6e9e5807fcbd48b75a96db5cbef36c996262196be42e6d4760dc86babbe61ad2"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "6e9e5807fcbd48b75a96db5cbef36c996262196be42e6d4760dc86babbe61ad2"
+    },
+    {
+      "file": "frontend/src/pages/CadastroCliente.css",
+      "status": "SAME",
+      "hashes": [
+        "88ffea789690b01a36e5d68c268b102ee4075824dc8b56315eff762b7c7c60ec",
+        "88ffea789690b01a36e5d68c268b102ee4075824dc8b56315eff762b7c7c60ec"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "88ffea789690b01a36e5d68c268b102ee4075824dc8b56315eff762b7c7c60ec"
+    },
+    {
+      "file": "frontend/src/pages/CadastroCliente.tsx",
+      "status": "SAME",
+      "hashes": [
+        "f3fa7b92f2d853ba9fbc9ba351f687e3ff4ddac6d04d359165dff6454785775b",
+        "f3fa7b92f2d853ba9fbc9ba351f687e3ff4ddac6d04d359165dff6454785775b"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "f3fa7b92f2d853ba9fbc9ba351f687e3ff4ddac6d04d359165dff6454785775b"
+    },
+    {
+      "file": "frontend/src/pages/CadastroOrdemServico.tsx",
+      "status": "SAME",
+      "hashes": [
+        "5e06c11c9e4e2e5018482104edd0d79a2064df5505ac9fa1bb8ba5b15344fbc4",
+        "5e06c11c9e4e2e5018482104edd0d79a2064df5505ac9fa1bb8ba5b15344fbc4"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "5e06c11c9e4e2e5018482104edd0d79a2064df5505ac9fa1bb8ba5b15344fbc4"
+    },
+    {
+      "file": "frontend/src/pages/CadastroVeiculo.tsx",
+      "status": "SAME",
+      "hashes": [
+        "fd9dc407868b028dad09825fb4780ba85c130ce1210af858972e418a92b8ec17",
+        "fd9dc407868b028dad09825fb4780ba85c130ce1210af858972e418a92b8ec17"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "fd9dc407868b028dad09825fb4780ba85c130ce1210af858972e418a92b8ec17"
+    },
+    {
+      "file": "frontend/src/pages/ConsultaClientes.tsx",
+      "status": "SAME",
+      "hashes": [
+        "b01a173a91e2466c0bebcbdb5901b0e480dff38574f6bb4b5dcc1505ee17a776",
+        "b01a173a91e2466c0bebcbdb5901b0e480dff38574f6bb4b5dcc1505ee17a776"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "b01a173a91e2466c0bebcbdb5901b0e480dff38574f6bb4b5dcc1505ee17a776"
+    },
+    {
+      "file": "frontend/src/pages/ConsultaOrdensServico.tsx",
+      "status": "SAME",
+      "hashes": [
+        "481b5dbcd189f4cc96eb2e4cfb82f6f27674b94052a2cc1534f9a97f70d339e0",
+        "481b5dbcd189f4cc96eb2e4cfb82f6f27674b94052a2cc1534f9a97f70d339e0"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "481b5dbcd189f4cc96eb2e4cfb82f6f27674b94052a2cc1534f9a97f70d339e0"
+    },
+    {
+      "file": "frontend/src/pages/ConsultaVeiculos.tsx",
+      "status": "SAME",
+      "hashes": [
+        "c200855a2429e3a980e7d49493a0578931318947e83a34fc422c583fce079078",
+        "c200855a2429e3a980e7d49493a0578931318947e83a34fc422c583fce079078"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "c200855a2429e3a980e7d49493a0578931318947e83a34fc422c583fce079078"
+    },
+    {
+      "file": "frontend/src/pages/NaoEncontrada.tsx",
+      "status": "SAME",
+      "hashes": [
+        "f799710bb40dda799d2412fc4b8f65d6d107b25cfe8937e7b0864824dc90504c",
+        "f799710bb40dda799d2412fc4b8f65d6d107b25cfe8937e7b0864824dc90504c"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "f799710bb40dda799d2412fc4b8f65d6d107b25cfe8937e7b0864824dc90504c"
+    },
+    {
+      "file": "frontend/src/services/api.ts",
+      "status": "SAME",
+      "hashes": [
+        "1eb14e4c34f70228585230c7c0f198ea2bf3d1fd53378186a766b839841e3985",
+        "1eb14e4c34f70228585230c7c0f198ea2bf3d1fd53378186a766b839841e3985"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "1eb14e4c34f70228585230c7c0f198ea2bf3d1fd53378186a766b839841e3985"
+    },
+    {
+      "file": "frontend/src/styles/Telas.css",
+      "status": "SAME",
+      "hashes": [
+        "99c5dfcd93bd9035a140e315b3f21bbe25e3c35371f5f2034479e75a171241b1",
+        "99c5dfcd93bd9035a140e315b3f21bbe25e3c35371f5f2034479e75a171241b1"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "99c5dfcd93bd9035a140e315b3f21bbe25e3c35371f5f2034479e75a171241b1"
+    },
+    {
+      "file": "frontend/tsconfig.app.json",
+      "status": "SAME",
+      "hashes": [
+        "8e5d12ba330e7d86409edec74b95451e0db22ee09b9426c94b5bf817571eddb0",
+        "8e5d12ba330e7d86409edec74b95451e0db22ee09b9426c94b5bf817571eddb0"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "8e5d12ba330e7d86409edec74b95451e0db22ee09b9426c94b5bf817571eddb0"
+    },
+    {
+      "file": "frontend/tsconfig.json",
+      "status": "SAME",
+      "hashes": [
+        "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808",
+        "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808"
+    },
+    {
+      "file": "frontend/tsconfig.node.json",
+      "status": "SAME",
+      "hashes": [
+        "d366cc0827139db39c61815f22491bbfda56c654354a42ad7795143d314e45e8",
+        "d366cc0827139db39c61815f22491bbfda56c654354a42ad7795143d314e45e8"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "d366cc0827139db39c61815f22491bbfda56c654354a42ad7795143d314e45e8"
+    },
+    {
+      "file": "frontend/vite.config.ts",
+      "status": "SAME",
+      "hashes": [
+        "e1eefd0ed1639c88d1213884ef760516884db9e168190e223fee6b063ad3e088",
+        "e1eefd0ed1639c88d1213884ef760516884db9e168190e223fee6b063ad3e088"
+      ],
+      "result": "VERIFIED",
+      "finalHash": "e1eefd0ed1639c88d1213884ef760516884db9e168190e223fee6b063ad3e088"
+    }
+  ]
+}

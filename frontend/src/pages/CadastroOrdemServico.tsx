@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
+import { Link } from 'react-router-dom';
 import TituloPagina from "../components/TituloPagina";
 import {
   cadastrarOrdemServico,
@@ -18,6 +19,7 @@ export default function CadastroOrdemServico() {
   const [erroBusca, setErroBusca] = useState("");
   const [aviso, setAviso] = useState<Aviso | null>(null);
   const [salvando, setSalvando] = useState(false);
+  const [novaOrdemId, setNovaOrdemId] = useState('');
 
   useEffect(() => {
     let ativo = true;
@@ -66,13 +68,14 @@ export default function CadastroOrdemServico() {
     setAviso(null);
 
     try {
-      await cadastrarOrdemServico({
+      const resposta = await cadastrarOrdemServico({
         descricao: String(dados.get("descricao") ?? "").trim(),
         data: String(dados.get("data") ?? ""),
         veiculoId,
       });
 
       form.reset();
+      setNovaOrdemId(resposta.id ?? '');
       setAviso({
         tipo: "success",
         mensagem: "Ordem de serviço cadastrada com sucesso.",
@@ -177,6 +180,7 @@ export default function CadastroOrdemServico() {
           )}
         </form>
       </section>
+      {novaOrdemId && <p><Link className="secondary-action" to={`/ordens-servico/servicos?ordem=${encodeURIComponent(novaOrdemId)}`}>Adicionar serviços à ordem criada</Link></p>}
     </div>
   );
 }

@@ -1,4 +1,8 @@
 @import "../pages/CadastroCliente.css";
+.form-fields-reset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.service-summary { padding: 8px 30px; color: #ccc; line-height: 1.6; }
+.service-summary strong, .order-total strong { color: #fff; }
+.order-total { text-align: right; font-size: 20px; margin: 22px 0; }
 .app-nav {
   display: flex;
   flex-wrap: wrap;

@@ -1,0 +1,134 @@
+[
+  {
+    "nome": "8 - Cadastrar serviço 3 Pontos",
+    "descricao": "**História de Usuário** Como funcionário da oficina, quero cadastrar os tipos de serviços oferecidos para utilizá-los nas ordens de serviço.\n\n**Prioridade:** Must Have\n\n**Justificativa:** Os serviços precisam estar registrados para compor as ordens de serviço e padronizar os atendimentos da oficina.\n\n**Critérios de Aceite**\n\n**Cenário 1 — Serviço cadastrado**\n\n**Dado** que os dados obrigatórios do serviço foram informados\n\n**Quando** o funcionário solicitar o cadastro\n\n**Então** o sistema deve registrar o serviço.\n\n**Cenário 2 — Valor de Serviço Inválido**\n\n**Dado** que o funcionário tenta cadastrar um serviço com o \"Preço Padrão\" negativo (ex: -R$ 50,00) ou contendo letras\n\n**Quando** ele solicitar o salvamento\n\n**Então** o sistema deve impedir o cadastro\n\n**E** exibir a mensagem \"Insira um valor numérico válido e maior que zero\".",
+    "url": "https://trello.com/c/9erdYq16/8-8-cadastrar-servi%C3%A7o-3-pontos",
+    "checklist": []
+  },
+  {
+    "nome": "9 - Adicionar serviço à ordem de serviço 2 Pontos",
+    "descricao": "**História de usuário**\n**Como** funcionário da oficina, quero adicionar serviços a uma ordem de serviço para registrar os trabalhos que serão realizados no veículo.\n\n**Prioridade:** Must Have\n\n**Justificativa:**\nPermite detalhar o conteúdo da ordem de serviço e registrar efetivamente o trabalho realizado pela oficina.\n\n**Critérios de aceite**\n\n**Cenário 1 — Serviço adicionado com sucesso**\n\n**Dado** que o funcionário está preenchendo uma Ordem de Serviço\n\n**E** seleciona um serviço cadastrado e ativo\n\n**Quando** ele confirmar a adição\n\n**Então** o sistema deve vincular o serviço à ordem de serviço\n\n**E** atualizar o valor total da ordem de serviço.\n\n**Cenário 2 — Serviço inexistente**\n\n**Dado** que o funcionário digita ou referencia um código/nome de serviço que não existe no sistema\n\n**Quando** ele tentar adicioná-lo à Ordem de Serviço\n\n**Então** o sistema deve impedir a operação\n\n**E** exibir a mensagem: \"Serviço não encontrado no sistema\".",
+    "url": "https://trello.com/c/4Fn6YQi6/9-9-adicionar-servi%C3%A7o-%C3%A0-ordem-de-servi%C3%A7o-2-pontos",
+    "checklist": []
+  },
+  {
+    "nome": "9.1 — Implementar associação de serviço à ordem de serviço",
+    "descricao": "Implementar a lógica responsável por associar um serviço cadastrado e ativo a uma ordem de serviço existente, registrando a associação no sistema.\n\nComplementos planejados\nHU vinculada: HU09 — [https://trello.com/c/4Fn6YQi6](https://trello.com/c/4Fn6YQi6 \"‌\")\nResponsável: a confirmar.\nVerificar OS e serviço; validar ativo; manter consistência entre item e total.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/Wz4NJmJy/80-91-implementar-associa%C3%A7%C3%A3o-de-servi%C3%A7o-%C3%A0-ordem-de-servi%C3%A7o",
+    "checklist": [
+      "Localizar a ordem de serviço selecionada.",
+      "Localizar o serviço informado.",
+      "Verificar se o serviço está cadastrado e ativo.",
+      "Associar o serviço à ordem de serviço.",
+      "Persistir a associação no sistema."
+    ]
+  },
+  {
+    "nome": "9.2 — Criar endpoint para adicionar serviço à ordem",
+    "descricao": "Criar o endpoint da API responsável por receber a solicitação de associação entre um serviço e uma ordem de serviço, encaminhando-a para a lógica de negócio.\n\nComplementos planejados\nHU vinculada: HU09 — [https://trello.com/c/4Fn6YQi6](https://trello.com/c/4Fn6YQi6 \"smartCard-inline\")\nResponsável: a confirmar.\nAcordar identificadores e erros; não confiar em preço ou total enviado pela tela.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/26TehQGF/81-92-criar-endpoint-para-adicionar-servi%C3%A7o-%C3%A0-ordem",
+    "checklist": [
+      "Definir a rota para adicionar serviço à ordem.",
+      "Receber o identificador da ordem de serviço.",
+      "Receber o identificador do serviço.",
+      "Encaminhar a solicitação à camada responsável.",
+      "Retornar a resposta da operação."
+    ]
+  },
+  {
+    "nome": "9.3 — Criar interface para adicionar serviço à ordem",
+    "descricao": "Desenvolver os componentes da interface que permitem ao funcionário selecionar uma ordem de serviço e escolher um serviço cadastrado e ativo para adicioná-lo à ordem.\n\nComplementos planejados\nHU vinculada: HU09 — [https://trello.com/c/4Fn6YQi6](https://trello.com/c/4Fn6YQi6 \"smartCard-inline\")\nResponsável: a confirmar.\nOferecer serviços elegíveis conforme regra acordada e impedir confirmação repetida em andamento.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/XXoszFnY/82-93-criar-interface-para-adicionar-servi%C3%A7o-%C3%A0-ordem",
+    "checklist": [
+      "Identificar a ordem de serviço que receberá o serviço.",
+      "Exibir os serviços disponíveis para seleção.",
+      "Permitir selecionar um serviço cadastrado e ativo.",
+      "Criar o controle para confirmar a associação.",
+      "Apresentar os dados selecionados antes da confirmação."
+    ]
+  },
+  {
+    "nome": "9.4 — Atualizar o valor total da ordem de serviço",
+    "descricao": "Implementar a atualização do valor total da ordem de serviço após a inclusão de um serviço, considerando o preço cadastrado para o serviço associado.\n\nComplementos planejados\nHU vinculada: HU09 — [https://trello.com/c/4Fn6YQi6](https://trello.com/c/4Fn6YQi6 \"smartCard-inline\")\nResponsável: a confirmar.\nCalcular no servidor com precisão monetária acordada; evitar perda de atualização concorrente e gravação parcial.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/qMUZPcsy/83-94-atualizar-o-valor-total-da-ordem-de-servi%C3%A7o",
+    "checklist": [
+      "Recuperar o preço do serviço selecionado.",
+      "Obter o valor total atual da ordem de serviço.",
+      "Somar o preço do serviço ao valor total.",
+      "Persistir o novo valor total da ordem.",
+      "Retornar o valor atualizado após a associação."
+    ]
+  },
+  {
+    "nome": "9.5 — Validar serviço e exibir mensagens",
+    "descricao": "Validar a existência do serviço informado durante a associação e apresentar a mensagem especificada quando o serviço não estiver cadastrado no sistema.\n\nComplementos planejados\nHU vinculada: HU09 — [https://trello.com/c/4Fn6YQi6](https://trello.com/c/4Fn6YQi6 \"smartCard-inline\")\nResponsável: a confirmar.\nComplementar os testes existentes com serviço inativo, falha de gravação e consistência do total; regras ainda não acordadas devem ser confirmadas primeiro.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/q7YoOkrQ/84-95-validar-servi%C3%A7o-e-exibir-mensagens",
+    "checklist": [
+      "Testar a associação com um serviço existente e ativo.",
+      "Verificar se o serviço foi associado à ordem.",
+      "Verificar se o valor total da ordem foi atualizado.",
+      "Impedir a operação quando o serviço não for encontrado.",
+      "Exibir a mensagem: \"Serviço não encontrado no sistema.\""
+    ]
+  },
+  {
+    "nome": "8.1 — Implementar cadastro de serviço no banco de dados",
+    "descricao": "Implementar a lógica responsável por registrar os serviços oferecidos pela oficina, armazenando os dados informados pelo funcionário no banco de dados.\n\nComplementos planejados\nHU vinculada: HU08 — [https://trello.com/c/9erdYq16](https://trello.com/c/9erdYq16 \"smartCard-inline\")\nResponsável: a confirmar.\nDefinir estrutura e obrigatoriedade; persistir preço válido e representação de ativo acordada.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/ngl23HUz/75-81-implementar-cadastro-de-servi%C3%A7o-no-banco-de-dados",
+    "checklist": [
+      "Definir os dados necessários para o cadastro do serviço.",
+      "Implementar a criação de um novo registro de serviço.",
+      "Persistir os dados do serviço no banco de dados.",
+      "Retornar o resultado do cadastro.",
+      "Tratar falhas durante a operação."
+    ]
+  },
+  {
+    "nome": "8.2 — Criar endpoint para cadastro de serviço",
+    "descricao": "Criar o endpoint da API responsável por receber os dados do serviço e encaminhar a solicitação de cadastro para a camada responsável pela lógica de negócio.\n\nComplementos planejados\nHU vinculada: HU08 — [https://trello.com/c/9erdYq16](https://trello.com/c/9erdYq16 \"smartCard-inline\")\nResponsável: a confirmar.\nValidar dados também no servidor, incluindo preço positivo e tipo numérico.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/1FCXmSOR/76-82-criar-endpoint-para-cadastro-de-servi%C3%A7o",
+    "checklist": [
+      "Definir a rota de cadastro de serviço.",
+      "Receber os dados informados na requisição.",
+      "Encaminhar os dados para a camada de serviço.",
+      "Retornar uma resposta após o processamento.",
+      "Tratar respostas de erro da operação."
+    ]
+  },
+  {
+    "nome": "8.3 — Criar tela de cadastro de serviço",
+    "descricao": "Desenvolver a interface que permite ao funcionário informar os dados necessários para cadastrar os tipos de serviços oferecidos pela oficina.\n\nComplementos planejados\nHU vinculada: HU08 — [https://trello.com/c/9erdYq16](https://trello.com/c/9erdYq16 \"smartCard-inline\")\nResponsável: a confirmar.\nIdentificar os campos acordados como obrigatórios e orientar formato do preço.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/FwpLyg3y/77-83-criar-tela-de-cadastro-de-servi%C3%A7o",
+    "checklist": [
+      "Criar a tela ou formulário de cadastro.",
+      "Adicionar o campo para o nome do serviço.",
+      "Adicionar o campo para o preço padrão.",
+      "Criar o controle para confirmar o cadastro.",
+      "Organizar a apresentação dos campos do formulário."
+    ]
+  },
+  {
+    "nome": "8.4 — Integrar formulário de cadastro com a API",
+    "descricao": "Integrar o formulário de cadastro ao endpoint da API, enviando os dados do serviço informados pelo funcionário e processando a resposta do servidor.\n\nComplementos planejados\nHU vinculada: HU08 — [https://trello.com/c/9erdYq16](https://trello.com/c/9erdYq16 \"smartCard-inline\")\nResponsável: a confirmar.\nAlinhar nomes/tipos dos campos e apresentar mensagens da API.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/CqvT5aPy/78-84-integrar-formul%C3%A1rio-de-cadastro-com-a-api",
+    "checklist": [
+      "Capturar os dados preenchidos no formulário.",
+      "Enviar os dados para o endpoint de cadastro.",
+      "Processar a resposta da API.",
+      "Atualizar a interface após o resultado da operação.",
+      "Tratar falhas de comunicação com a API."
+    ]
+  },
+  {
+    "nome": "8.5 — Validar preço padrão e exibir mensagens",
+    "descricao": "Implementar as validações do preço padrão do serviço, impedindo o cadastro quando o valor for negativo ou contiver letras e apresentando a mensagem de erro definida nos critérios de aceite.\n\nComplementos planejados\nHU vinculada: HU08 — [https://trello.com/c/9erdYq16](https://trello.com/c/9erdYq16 \"smartCard-inline\")\nResponsável: a confirmar.\nRegistrar testes com preço positivo, zero, negativo, letras e campo ausente.\nEvidências: registrar após execução (links, capturas ou logs e resultados).\nSituação dos testes: atividades planejadas; nenhum resultado informado.",
+    "url": "https://trello.com/c/1wcLTT6i/79-85-validar-pre%C3%A7o-padr%C3%A3o-e-exibir-mensagens",
+    "checklist": [
+      "Validar se o preço padrão foi informado em formato numérico.",
+      "Impedir o cadastro de preços negativos.",
+      "Impedir o cadastro de preços que contenham letras.",
+      "Exibir a mensagem: \"Insira um valor numérico válido e maior que zero.\"",
+      "Testar o cadastro com preço válido e com preço inválido."
+    ]
+  }
+]
