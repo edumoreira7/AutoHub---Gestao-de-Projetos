@@ -193,3 +193,54 @@ tbody tr:last-child td {
     font-size: 16px;
   }
 }
+
+.status-cell {
+  min-width: 180px;
+}
+
+.status-cell select {
+  min-height: 40px;
+  margin: 0;
+  padding: 8px 10px;
+}
+
+.status-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.status-actions button {
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid #a91d23;
+  border-radius: 6px;
+  background: #a91d23;
+  color: #fff;
+  cursor: pointer;
+}
+
+.status-actions button.status-cancel {
+  border-color: #555;
+  background: transparent;
+  color: #ddd;
+}
+
+.status-actions button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.status-feedback {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.status-feedback-success {
+  color: #a8e6b0;
+}
+
+.status-feedback-error {
+  color: #ff9999;
+}

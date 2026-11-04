@@ -89,6 +89,7 @@ export interface NovaOrdemServico {
 }
 
 export interface OrdemServico {
+  status?: StatusOrdemServico | null;
   _id: string;
   descricao: string;
   data: string;
@@ -208,4 +209,28 @@ export async function consultarOrdensServico(
     ...ordem,
     veiculo: ordem.veiculo ?? "Veículo não encontrado",
   }));
+}
+
+export const STATUS_ORDENS_SERVICO = [
+  { valor: "ABERTA", rotulo: "Aberta" },
+  { valor: "EM_ANDAMENTO", rotulo: "Em andamento" },
+  { valor: "AGUARDANDO_PEÇAS", rotulo: "Aguardando peças" },
+  { valor: "CONCLUÍDA", rotulo: "Concluída" },
+  { valor: "CANCELADA", rotulo: "Cancelada" },
+] as const;
+
+export type StatusOrdemServico =
+  (typeof STATUS_ORDENS_SERVICO)[number]["valor"];
+
+export async function atualizarStatusOrdemServico(
+  id: string,
+  status: StatusOrdemServico,
+): Promise<ApiResponse> {
+  return request(`/ordens-servico/${encodeURIComponent(id)}/status`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+  });
 }

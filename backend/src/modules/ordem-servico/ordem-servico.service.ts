@@ -6,7 +6,7 @@ import { invalid, notFound, required, requiredBody, success } from '../../utils/
 import { Veiculo } from '../veiculo/veiculo.schema.js';
 import { OrdemServicoCreateDto } from './dto/ordem-servico-create.dto.js';
 import { OrdemServicoSearchDto } from './dto/ordem-servico-search.dto.js';
-import { OrdemServico, OrdemServicoFields } from './ordem-servico.schema.js';
+import { ORDEM_SERVICO_STATUSES, OrdemServico, OrdemServicoFields, OrdemServicoStatus } from './ordem-servico.schema.js';
 import { escapeRegex } from '../../utils/string.utils.js';
 import { MONGO_REGEX_CASE_INSENSITIVE, excludeVersionKey } from '../../utils/mongo.utils.js';
 import { badRequest, conflict, internalServerError } from '../../utils/response.util.js';
@@ -24,6 +24,11 @@ export class OrdemServicoService {
 
     async findAll(dto: OrdemServicoSearchDto = {}) {
         const filter: QueryFilter<OrdemServico> = {};
+        for (const field of ['descricao', 'data', 'veiculoId'] as const) {
+            if (dto[field] !== undefined && typeof dto[field] !== 'string') {
+                invalid(OrdemServicoFields[field]);
+            }
+        }
         const descricao = dto.descricao?.trim();
         const data = dto.data?.trim();
         const veiculoId = dto.veiculoId?.trim();
@@ -37,6 +42,10 @@ export class OrdemServicoService {
 
         if (data) {
             if (!/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+                invalid(OrdemServicoFields.data);
+            }
+            const parsedDate = new Date(data + 'T00:00:00.000Z');
+            if (Number.isNaN(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== data) {
                 invalid(OrdemServicoFields.data);
             }
             filter.data = data;
@@ -69,6 +78,26 @@ export class OrdemServicoService {
                 veiculoId: ordem.veiculoId && typeof ordem.veiculoId === 'object' ? (ordem.veiculoId as { _id?: string })._id ?? ordem.veiculoId : ordem.veiculoId,
             };
         }));
+    }
+
+    async updateStatus(id: string, status: string | undefined) {
+        const ordemId = id?.trim();
+        if (!ordemId || !/^[a-f\d]{24}$/i.test(ordemId) || !Types.ObjectId.isValid(ordemId)) {
+            invalid('Identificador da ordem de serviço');
+        }
+        if (!status || !ORDEM_SERVICO_STATUSES.includes(status as OrdemServicoStatus)) {
+            invalid('Status');
+        }
+
+        const novoStatus = status as OrdemServicoStatus;
+        const ordem = await this.model.findByIdAndUpdate(
+            ordemId,
+            { status: novoStatus },
+            { new: true, runValidators: true },
+        ).exec();
+        if (!ordem) notFound('Ordem de serviço');
+
+        return success(ordem._id.toString(), undefined, 'Status da ordem de serviço atualizado com sucesso');
     }
 
     async adicionarServico(id: string, dto: AdicionarServicoDto) {
@@ -104,6 +133,11 @@ export class OrdemServicoService {
     async create(dto: OrdemServicoCreateDto) {
         if (!dto) requiredBody();
 
+        for (const field of ['descricao', 'data', 'veiculoId'] as const) {
+            if (dto[field] !== undefined && typeof dto[field] !== 'string') {
+                invalid(OrdemServicoFields[field]);
+            }
+        }
         const descricao = dto.descricao?.trim();
         const data = dto.data?.trim();
         const veiculoId = dto.veiculoId?.trim();
