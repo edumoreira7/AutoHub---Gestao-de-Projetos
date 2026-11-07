@@ -81,6 +81,14 @@ export class OrdemServicoService {
         }));
     }
 
+    async orcamento(id: string) {
+        if (!/^[a-f\d]{24}$/i.test(id)) badRequest('Identificador da ordem de serviço inválido');
+        const ordem = await this.model.findById(id).populate('veiculoId', 'placa marca modelo').lean();
+        if (!ordem) notFound('Ordem de serviço');
+        if (!ordem.servicos?.length) badRequest('Adicione ao menos um item para gerar o orçamento');
+        return success(id, { ordemId: id, descricao: ordem.descricao, data: ordem.data, veiculo: ordem.veiculoId, itens: ordem.servicos, totalCentavos: ordem.totalCentavos, emitidoEm: new Date().toISOString() });
+    }
+
     async updateStatus(id: string, status: string | undefined) {
         const ordemId = id?.trim();
         if (!ordemId || !/^[a-f\d]{24}$/i.test(ordemId) || !Types.ObjectId.isValid(ordemId)) {

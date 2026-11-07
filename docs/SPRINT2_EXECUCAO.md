@@ -1,5 +1,13 @@
 # Sprint 2 integrada — execução e revisão
 
+## Extensão rápida — estoque e orçamentos
+
+O menu lateral agora inclui **Estoque de peças** (HU10, HU11, HU12) e **Orçamentos** (HU13). O visual foi reformulado com navegação por área, formulários claros e tabelas operacionais. Reinicie a API para carregar o novo módulo.
+
+Para demonstrar: em Estoque de peças, cadastrar Filtro de óleo, código FLT-001, saldo 5. Selecionar a peça e movimentar +3: saldo 8. Tentar -9: operação recusada, saldo preservado. Pesquisar FLT-001 e depois um termo inexistente. Em Orçamentos, selecionar uma OS com serviços, gerar e usar Imprimir / Salvar PDF. Uma OS sem serviços deve ser recusada com mensagem orientativa.
+
+Os campos mínimos de peça são uma decisão desta implementação (nome, código e quantidade), documentada na modelagem para revisão da equipe. Não foi alterado o status das histórias no Trello. O orçamento é uma apresentação dos serviços da OS, sem proposta independente persistida ou envio automático ao cliente.
+
 A branch `integracao/autohub` reúne HU06, HU07, HU08 e HU09. Use a pasta `AutoHub-integracao` para executar esta versão.
 
 ## Rodar

@@ -9,13 +9,17 @@ import CadastroOrdemServico from "./pages/CadastroOrdemServico";
 import ConsultaOrdensServico from "./pages/ConsultaOrdensServico";
 import CadastroServico from "./pages/CadastroServico";
 import ServicosOrdem from "./pages/ServicosOrdem";
+import Estoque from "./pages/Estoque";
+import Orcamento from "./pages/Orcamento";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route index element={<Navigate to="/clientes/novo" replace />} />
+          <Route index element={<Navigate to="/ordens-servico" replace />} />
+          <Route path="estoque" element={<Estoque />} />
+          <Route path="orcamentos" element={<Orcamento />} />
           <Route path="clientes/novo" element={<CadastroCliente />} />
           <Route path="clientes" element={<ConsultaClientes />} />
           <Route path="veiculos/novo" element={<CadastroVeiculo />} />

@@ -14,6 +14,9 @@ export class OrdemServicoController {
         return this.service.updateStatus(id, dto?.status);
     }
 
+    @Get(':id/orcamento')
+    orcamento(@Param('id') id: string) { return this.service.orcamento(id); }
+
     @Post(':id/servicos')
     adicionarServico(@Param('id') id: string, @Body() dto: AdicionarServicoDto) {
         return this.service.adicionarServico(id, dto);

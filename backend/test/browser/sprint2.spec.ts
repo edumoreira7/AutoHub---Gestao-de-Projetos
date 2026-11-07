@@ -81,7 +81,37 @@ test('fluxo completo: cliente → veículo → ordem → serviço → inclusão 
     await page.getByRole('button', { name: 'Mostrar todos' }).click();
     await expect(editorStatus).toHaveValue('CONCLUIDA');
     await page.screenshot({ path: 'test-results/sprint2-consulta.png', fullPage: true });
+    await page.getByRole('link', { name: 'Orçamentos', exact: true }).click();
+    await page.getByRole('combobox', { name: 'Ordem de serviço', exact: true }).selectOption({ index: 1 });
+    await page.getByRole('button', { name: 'Gerar orçamento', exact: true }).click();
+    await expect(page.getByText('Total estimado')).toContainText('100,29');
+    await expect(page.getByRole('cell', { name: 'Troca de óleo navegador', exact: true })).toBeVisible();
+    await page.screenshot({ path: 'test-results/orcamento-erp.png', fullPage: true });
     expect(erros).toEqual([]);
+});
+
+test('estoque: cadastro, entrada, saída inválida, pesquisa e persistência', async ({ page }) => {
+    await page.goto('/estoque');
+    await page.getByLabel('Nome da peça', { exact: true }).fill('Filtro ERP');
+    await page.getByLabel('Código', { exact: true }).fill('ERP-001');
+    await page.getByLabel('Quantidade inicial', { exact: true }).fill('5');
+    await page.getByRole('button', { name: 'Cadastrar peça', exact: true }).click();
+    await expect(page.getByRole('status')).toContainText('Peça cadastrada com sucesso');
+    await page.getByRole('combobox', { name: 'Peça', exact: true }).selectOption({ index: 1 });
+    await page.getByLabel('Movimentação (unidades)', { exact: false }).fill('-6');
+    await page.getByRole('button', { name: 'Confirmar movimentação' }).click();
+    await expect(page.getByRole('alert')).toContainText('estoque insuficiente');
+    await page.getByLabel('Movimentação (unidades)', { exact: false }).fill('3');
+    await page.getByRole('button', { name: 'Confirmar movimentação' }).click();
+    await expect(page.getByRole('status')).toContainText('Estoque atualizado com sucesso');
+    await page.reload();
+    await expect(page.getByRole('cell', { name: '8 un.', exact: true })).toBeVisible();
+    await page.screenshot({ path: 'test-results/estoque-erp.png', fullPage: true });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.screenshot({ path: 'test-results/estoque-mobile.png', fullPage: true });
+    await page.getByLabel('Pesquisar peças').fill('ZZSEMRESULTADO');
+    await page.getByRole('button', { name: 'Pesquisar estoque' }).click();
+    await expect(page.getByText('Nenhuma peça encontrada.', { exact: true })).toBeVisible();
 });
 
 test('cadastro trata falha da API e preserva dados para tentar novamente', async ({ page }) => {

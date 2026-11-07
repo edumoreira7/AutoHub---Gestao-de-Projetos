@@ -1,5 +1,13 @@
 # Modelagem do Sistema — AutoHub
 
+## Implementação adicional — 07/11/2026
+
+HU10–HU12 usam a collection `pecas`: `nome` obrigatório (até 100 caracteres), `codigo` obrigatório e único normalizado em maiúsculas (até 40 caracteres), `quantidade` inteira não negativa e timestamps. São escolhas mínimas desta implementação, pois os cartões não enumeram os campos obrigatórios; devem ser revisadas pela equipe antes do aceite final. `POST /pecas` cadastra, `GET /pecas?busca=` consulta nome/código e `PATCH /pecas/:id/movimentacoes` recebe uma quantidade inteira assinada diferente de zero. Positivo é entrada, negativo é saída. Atualização atômica condicionada ao saldo impede estoque negativo, inclusive com saídas concorrentes. Não há baixa automática de peças pela OS.
+
+HU13 usa `GET /ordens-servico/:id/orcamento`, sem nova collection: apresenta itens históricos e total em centavos da OS, veículo e data de emissão. OS sem itens retorna 400. A tela oferece impressão/PDF pelo navegador. Não salva uma proposta independente nem aprova a execução; a apresentação reflete a OS no momento da geração.
+
+Este adendo prevalece sobre as decisões pendentes históricas de peças e orçamento nas seções abaixo. O contrato ativo de OS usa `veiculoId`, `data`, `servicos[].precoCentavos` e `totalCentavos`, conforme a entrega HU08/HU09. Status ativos: ABERTA, EM_ANDAMENTO, CONCLUIDA e CANCELADA.
+
 > Documento de referência para desenvolvimento do front-end, back-end e banco de dados.
 >
 > Stack considerada no projeto: **React + NestJS + MongoDB/Mongoose**.

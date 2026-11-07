@@ -89,6 +89,48 @@ describe('Regressão completa + HU08/HU09 (HTTP e MongoDB real isolado)', () => 
         expect(salvo).not.toHaveProperty('status');
         await connection.collection('ordens_servico').deleteOne({ _id: insertedId });
     });
+    it('HU10 cadastra peça, exige dados e impede código duplicado', async () => {
+        for (const dto of [{}, { nome: 'Filtro' }, { nome: 'Filtro', codigo: 'FLT', quantidade: -1 }, { nome: 'Filtro', codigo: 'FLT', quantidade: 1.5 }]) {
+            await api().post('/pecas').send(dto).expect(400);
+        }
+        const resposta = await api().post('/pecas').send({ nome: ' Filtro de óleo ', codigo: ' flt-001 ', quantidade: 5 }).expect(201);
+        const salvo = await connection.collection('pecas').findOne({ _id: new Types.ObjectId(resposta.body.id) });
+        expect(salvo).toMatchObject({ nome: 'Filtro de óleo', codigo: 'FLT-001', quantidade: 5 });
+        await api().post('/pecas').send({ nome: 'Outro filtro', codigo: 'FLT-001', quantidade: 0 }).expect(409);
+    });
+    it('HU11 atualiza atomicamente e impede saldo negativo inclusive em concorrência', async () => {
+        const resposta = await api().post('/pecas').send({ nome: 'Pastilha', codigo: 'PST-001', quantidade: 2 }).expect(201);
+        const path = `/pecas/${resposta.body.id}/movimentacoes`;
+        await api().patch(path).send({ quantidade: 1 }).expect(200);
+        const resultados = await Promise.all([api().patch(path).send({ quantidade: -2 }), api().patch(path).send({ quantidade: -2 })]);
+        expect(resultados.map(item => item.status).sort()).toEqual([200, 400]);
+        for (const quantidade of [0, -5, 0.5, '2', null]) await api().patch(path).send({ quantidade }).expect(400);
+        await api().patch(`/pecas/${unknownId()}/movimentacoes`).send({ quantidade: 1 }).expect(404);
+        await api().patch('/pecas/invalido/movimentacoes').send({ quantidade: 1 }).expect(400);
+        const salvo = await connection.collection('pecas').findOne({ _id: new Types.ObjectId(resposta.body.id) });
+        expect(salvo?.quantidade).toBe(1);
+    });
+    it('HU12 pesquisa nome/código, lista quantidades e retorna vazio', async () => {
+        const nome = await api().get('/pecas').query({ busca: 'filtro' }).expect(200);
+        expect(nome.body.data[0]).toMatchObject({ codigo: 'FLT-001', quantidade: 5 });
+        const codigo = await api().get('/pecas').query({ busca: 'flt-001' }).expect(200);
+        expect(codigo.body.data).toHaveLength(1);
+        const vazio = await api().get('/pecas').query({ busca: 'ZZSEMRESULTADO' }).expect(200);
+        expect(vazio.body.data).toEqual([]);
+    });
+    it('HU13 impede orçamento vazio e apresenta itens e total da OS', async () => {
+        const nova = await api().post('/ordens-servico').send({ descricao: 'Orçamento', data: '2026-11-07', veiculoId }).expect(201);
+        const path = `/ordens-servico/${nova.body.id}/orcamento`;
+        const vazio = await api().get(path).expect(400);
+        expect(vazio.body.message).toContain('ao menos um item');
+        const servico = await api().post('/servicos').send({ nome: 'Serviço orçamento', precoPadrao: 80.29 }).expect(201);
+        await api().post(`/ordens-servico/${nova.body.id}/servicos`).send({ servicoId: servico.body.id }).expect(201);
+        const orcamento = await api().get(path).expect(200);
+        expect(orcamento.body.data.totalCentavos).toBe(8029);
+        expect(orcamento.body.data.itens[0]).toMatchObject({ nome: 'Serviço orçamento', precoCentavos: 8029 });
+        expect(orcamento.body.data.veiculo.placa).toBe('ABC1D23');
+        await api().get(`/ordens-servico/${unknownId()}/orcamento`).expect(404);
+    });
     it.each([0, -50, 'abc', '50', null, undefined, true, {}, 0.001, 10.123])('HU08 rejeita preço %j sem salvar', async precoPadrao => {
         const antes = await connection.collection('servicos').countDocuments();
         const result = await api().post('/servicos').send({ nome: 'Inválido', precoPadrao }).expect(400);
