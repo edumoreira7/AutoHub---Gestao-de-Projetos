@@ -58,6 +58,37 @@ describe('Regressão completa + HU08/HU09 (HTTP e MongoDB real isolado)', () => 
         const lista = await api().get('/ordens-servico').expect(200);
         expect(lista.body.data[0]).toMatchObject({ totalCentavos: 0, servicos: [] });
     });
+    it('HU06 atualiza os quatro status e HU07 retorna o valor persistido', async () => {
+        for (const status of ['EM_ANDAMENTO', 'CONCLUIDA', 'CANCELADA', 'ABERTA']) {
+            await api().patch(`/ordens-servico/${ordemId}/status`).send({ status }).expect(200);
+            const salvo = await connection.collection('ordens_servico').findOne({ _id: new Types.ObjectId(ordemId) });
+            expect(salvo?.status).toBe(status);
+            const lista = await api().get('/ordens-servico').expect(200);
+            expect(lista.body.data.find((ordem: { _id: string }) => ordem._id === ordemId).status).toBe(status);
+        }
+    });
+    it('HU06 rejeita status inválido e OS ausente sem alterar a ordem', async () => {
+        for (const status of ['INVALIDO', 'CONCLUÍDA', 'AGUARDANDO_PEÇAS', '', 5, null]) {
+            await api().patch(`/ordens-servico/${ordemId}/status`).send({ status }).expect(400);
+        }
+        await api().patch(`/ordens-servico/${ordemId}/status`).send({}).expect(400);
+        await api().patch(`/ordens-servico/${unknownId()}/status`).send({ status: 'ABERTA' }).expect(404);
+        await api().patch('/ordens-servico/invalido/status').send({ status: 'ABERTA' }).expect(400);
+        const salvo = await connection.collection('ordens_servico').findOne({ _id: new Types.ObjectId(ordemId) });
+        expect(salvo?.status).toBe('ABERTA');
+    });
+    it('HU07 consulta vazia e legado sem status não alteram os documentos', async () => {
+        const vazio = await api().get('/ordens-servico').query({ descricao: 'ZZSEMRESULTADO' }).expect(200);
+        expect(vazio.body.data).toEqual([]);
+        const { insertedId } = await connection.collection('ordens_servico').insertOne({
+            descricao: 'Legado sem status', data: '2026-11-07', veiculoId: new Types.ObjectId(veiculoId),
+        });
+        const lista = await api().get('/ordens-servico').query({ descricao: 'Legado sem status' }).expect(200);
+        expect(lista.body.data[0].status).toBeNull();
+        const salvo = await connection.collection('ordens_servico').findOne({ _id: insertedId });
+        expect(salvo).not.toHaveProperty('status');
+        await connection.collection('ordens_servico').deleteOne({ _id: insertedId });
+    });
     it.each([0, -50, 'abc', '50', null, undefined, true, {}, 0.001, 10.123])('HU08 rejeita preço %j sem salvar', async precoPadrao => {
         const antes = await connection.collection('servicos').countDocuments();
         const result = await api().post('/servicos').send({ nome: 'Inválido', precoPadrao }).expect(400);

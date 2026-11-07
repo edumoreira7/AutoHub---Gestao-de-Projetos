@@ -214,8 +214,7 @@ export async function consultarOrdensServico(
 export const STATUS_ORDENS_SERVICO = [
   { valor: "ABERTA", rotulo: "Aberta" },
   { valor: "EM_ANDAMENTO", rotulo: "Em andamento" },
-  { valor: "AGUARDANDO_PEÇAS", rotulo: "Aguardando peças" },
-  { valor: "CONCLUÍDA", rotulo: "Concluída" },
+  { valor: "CONCLUIDA", rotulo: "Concluída" },
   { valor: "CANCELADA", rotulo: "Cancelada" },
 ] as const;
 

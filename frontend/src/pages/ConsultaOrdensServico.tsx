@@ -63,7 +63,7 @@ function EditorStatus({
       >
         {!ordem.status && (
           <option value="" disabled>
-            Sem status registrado
+            Status não informado
           </option>
         )}
         {STATUS_ORDENS_SERVICO.map((status) => (
@@ -71,6 +71,9 @@ function EditorStatus({
             {status.rotulo}
           </option>
         ))}
+        {ordem.status && !STATUS_ORDENS_SERVICO.some((status) => status.valor === ordem.status) && (
+          <option value={ordem.status} disabled>Status legado: {ordem.status}</option>
+        )}
       </select>
       {alterado && (
         <div className="status-actions">
@@ -162,6 +165,7 @@ export default function ConsultaOrdensServico() {
         );
       }}
       colunas={[
+        { chave: "identificacao", titulo: "Identificação da OS" },
         { chave: "descricao", titulo: "Descrição" },
         { chave: "data", titulo: "Data" },
         { chave: "veiculo", titulo: "Veículo" },

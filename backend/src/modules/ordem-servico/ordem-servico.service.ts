@@ -69,6 +69,7 @@ export class OrdemServicoService {
 
             return {
                 ...ordem,
+                status: ordem.status ?? null,
                 servicos: ordem.servicos ?? [],
                 totalCentavos: ordem.totalCentavos ?? 0,
                 total: Number(ordem.totalCentavos ?? 0) / 100,
@@ -93,7 +94,7 @@ export class OrdemServicoService {
         const ordem = await this.model.findByIdAndUpdate(
             ordemId,
             { status: novoStatus },
-            { new: true, runValidators: true },
+            { returnDocument: 'after', runValidators: true },
         ).exec();
         if (!ordem) notFound('Ordem de serviço');
 

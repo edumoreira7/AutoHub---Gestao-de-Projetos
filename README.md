@@ -1,5 +1,7 @@
 # AutoHub
 
+Para executar e demonstrar HU06–HU09 na versão integrada, consulte [Sprint 2 — execução e revisão](docs/SPRINT2_EXECUCAO.md).
+
 Sistema de gestão para oficinas mecânicas, desenvolvido como projeto acadêmico da disciplina **Gestão de Projetos**.
 
 ## Sobre o Projeto

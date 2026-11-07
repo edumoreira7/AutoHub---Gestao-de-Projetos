@@ -6,8 +6,7 @@ import { Veiculo } from '../veiculo/veiculo.schema.js';
 export const ORDEM_SERVICO_STATUSES = [
     'ABERTA',
     'EM_ANDAMENTO',
-    'AGUARDANDO_PEÇAS',
-    'CONCLUÍDA',
+    'CONCLUIDA',
     'CANCELADA',
 ] as const;
 
