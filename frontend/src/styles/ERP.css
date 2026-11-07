@@ -1,4 +1,4 @@
-:root { color-scheme: light; color: #263244; background: #f3f5f8; font-family: Inter, 'Segoe UI', Arial, sans-serif; }
+:root { color-scheme: light; color: #303238; background: #f4f4f5; font-family: Inter, 'Segoe UI', Arial, sans-serif; }
 body { background: #f3f5f8; }
 ::selection { background: #d7e5ff; color: #193769; }
 :focus-visible { outline: 3px solid #5787cf; outline-offset: 3px; }
@@ -72,3 +72,18 @@ tbody tr:hover { background: #f8fbff; }
 @media (max-width: 1100px) { .erp-sidebar { width: 218px; }.erp-content main { padding: 25px 24px; }.erp-two-columns { grid-template-columns: 1fr; } }
 @media (max-width: 700px) { .app-shell { display: block; }.erp-sidebar { position: static; height: auto; width: 100%; padding: 16px; }.erp-brand { padding-bottom: 15px; }.erp-workspace, .sidebar-bottom { display: none; }.erp-sidebar .app-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }.nav-section { grid-column: 1 / -1; padding: 12px 10px 4px; }.erp-sidebar .app-nav a { text-align: left; font-size: 11px; padding: 10px; }.erp-topbar { min-height: 52px; padding: 0 18px; }.erp-header-label { display: none; }.erp-content main { padding: 22px 16px; }h1 { font-size: 25px; }.fields { padding: 20px; grid-template-columns: 1fr; }.card-heading { padding: 20px; }.form-footer { padding: 18px 20px; }.inventory-search { width: 100%; flex-wrap: wrap; }.quote-document { padding: 22px; }.quote-total { gap: 16px; }.quote-total strong { font-size: 22px; } }
 @media print { .erp-sidebar, .erp-topbar, .no-print, .page-footer, .breadcrumb, .page-heading { display: none !important; }.app-shell { display: block; }.erp-content main { padding: 0; }.quote-document { border: 0; margin: 0; padding: 10px; }body, :root { background: white; } }
+
+.app-shell { background: #f4f4f5; color: #303238; }
+.app-shell .erp-sidebar { background: #202124; color: #dedee1; }
+.app-shell .erp-brand { flex-direction: column; gap: 6px; padding: 0 6px 14px; }
+.erp-original-logo { display: block; width: 112px; height: 91px; object-fit: contain; }
+.erp-brand-caption { font-size: 8px; font-weight: 600; letter-spacing: 2px; color: #b9b9bd; }
+.app-shell .erp-workspace { border-color: #45454b; }.app-shell .erp-workspace-icon, .app-shell .erp-avatar { background: #39393f; }
+.app-shell .erp-sidebar .app-nav a { color: #d5d5da; }.app-shell .erp-sidebar .app-nav a:hover { background: #343438; }.app-shell .erp-sidebar .app-nav a.active { background: #52282d; box-shadow: inset 3px 0 #e35b65; color: #fff; }
+.app-shell .nav-section, .app-shell .erp-workspace small, .app-shell .sidebar-bottom small { color: #aaaab2; }
+.app-shell .eyebrow { color: #a32c37; }.app-shell .module-tag { background: #f8edef; color: #9a5059; }
+.app-shell .form-footer button, .app-shell .inventory-search button, .app-shell .quote-document button { background: #a92a36; border-color: #a92a36; }.app-shell .form-footer button:hover, .app-shell .inventory-search button:hover, .app-shell .quote-document button:hover { background: #86212b; }
+.app-shell .form-footer .clear-button { background: white; color: #555963; border-color: #d2d3d8; }.app-shell .status-actions button { background: #a92a36; border-color: #a92a36; }.app-shell .status-actions button.status-cancel { background: white; color: #555963; border-color: #d2d3d8; }
+.app-shell input:focus, .app-shell select:focus, .app-shell textarea:focus { border-color: #b4414b; }.app-shell :focus-visible { outline-color: #b4414b; }
+.app-shell th { background: #f7f7f8; color: #626670; }.app-shell tbody tr:hover { background: #fdf8f9; }
+@media(max-width:700px) { .app-shell .erp-brand { flex-direction: row; justify-content: flex-start; padding-bottom: 10px; }.erp-original-logo { width: 90px; height: 76px; }.erp-brand-caption { font-size: 8px; } }

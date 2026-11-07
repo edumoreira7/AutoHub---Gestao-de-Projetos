@@ -7,7 +7,7 @@ export default function AppLayout() {
   return (
     <div className="app-shell">
       <aside className="erp-sidebar">
-        <NavLink className="erp-brand" to="/"><span className="erp-brand-mark">A</span><span>Auto<strong>Hub</strong><small>GESTÃO DE OFICINAS</small></span></NavLink>
+        <NavLink className="erp-brand" to="/" aria-label="AutoHub — início"><img className="erp-original-logo" src="/autohub-logo.png" alt="AutoHub" /><span className="erp-brand-caption">GESTÃO DE OFICINAS</span></NavLink>
         <div className="erp-workspace"><span className="erp-workspace-icon">OF</span><div>Minha oficina<small>Ambiente de gestão</small></div></div>
         <nav className="app-nav" aria-label="Navegação principal">
           <span className="nav-section">RELACIONAMENTO</span>
