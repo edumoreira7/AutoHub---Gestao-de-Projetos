@@ -7,11 +7,12 @@ Para executar e demonstrar HU06–HU09 na versão integrada, consulte [Sprint 2 
 A `main` reúne HU01–HU13, com estoque, orçamento e o visual ERP com a identidade AutoHub. HU06–HU09 correspondem aos 10 Story Points originalmente planejados para a Sprint 2; HU10–HU13 são uma extensão posterior. O Product Owner confirmou o vídeo concluído e marcou HU06–HU13 como completas no Trello.
 
 - [Relatório executivo final atualizado](docs/Relatorio_Executivo_Final_AutoHub.docx)
+- [Vídeo da Sprint Review — HU06–HU09 Must Have](https://youtu.be/jtFZeih1BqY)
 - [Execução e roteiro da demonstração](docs/SPRINT2_EXECUCAO.md)
 - [Quadro da Sprint e backlog](https://trello.com/b/mfqLZ0XI/autohub-gestao-de-projetos)
 - [Gestão de riscos](https://trello.com/b/fqLFFhh5/autohub-riscos-da-sprint-2)
 
-Validação: 67 testes aprovados (28 unitários, 32 de integração HTTP/MongoDB temporário e 7 de navegador), além dos builds e lint. Para reproduzir, executar `npm run test:all` em `backend`. A aplicação precisa de MongoDB e configuração local conforme as instruções abaixo; credenciais não são versionadas. O vídeo deve ser anexado pelo grupo à entrega, pois seu arquivo/link não foi fornecido neste repositório.
+Validação: 67 testes aprovados (28 unitários, 32 de integração HTTP/MongoDB temporário e 7 de navegador), além dos builds e lint. Para reproduzir, executar `npm run test:all` em `backend`. A aplicação precisa de MongoDB e configuração local conforme as instruções abaixo; credenciais não são versionadas. O vídeo apresenta somente HU06–HU09, Must Have do escopo original da Sprint 2. As HU10–HU13 são entregas adicionais publicadas, sem demonstração nesse vídeo.
 
 Sistema de gestão para oficinas mecânicas, desenvolvido como projeto acadêmico da disciplina **Gestão de Projetos**.
 
